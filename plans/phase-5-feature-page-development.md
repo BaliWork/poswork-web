@@ -8,11 +8,11 @@
 
 ### Checklist
 
-- [ ] Create `src/components/layout/AppLayout.tsx` — main layout wrapper with sidebar + header
-- [ ] Create `src/components/layout/Sidebar.tsx` — navigation sidebar (role-aware menu items)
-- [ ] Create `src/components/layout/Header.tsx` — top header bar with user info and logout
-- [ ] Sidebar hides "Merchants" link for Admin Merchant role
-- [ ] Layout is responsive (collapsible sidebar on mobile)
+- [x] Create `src/components/layout/AppLayout.tsx` — main layout wrapper with sidebar + header
+- [x] Create `src/components/layout/Sidebar.tsx` — navigation sidebar (role-aware menu items)
+- [x] Create `src/components/layout/Header.tsx` — top header bar with user info and logout
+- [x] Sidebar hides "Merchants" link for Admin Merchant role
+- [x] Layout is responsive (collapsible sidebar on mobile)
 
 ---
 
@@ -20,12 +20,12 @@
 
 ### Checklist
 
-- [ ] Email + password form using ShadCN Input, Label, Button
-- [ ] Client-side input validation (required, email format)
-- [ ] Handle Firebase Auth errors with user-friendly messages
-- [ ] Block cashier users with a clear error message
-- [ ] Redirect authenticated users away from login page
-- [ ] Loading state on submit button
+- [x] Email + password form using ShadCN Input, Label, Button
+- [x] Client-side input validation (required, email format)
+- [x] Handle Firebase Auth errors with user-friendly messages
+- [x] Block cashier users with a clear error message
+- [x] Redirect authenticated users away from login page
+- [x] Loading state on submit button
 
 ---
 
@@ -33,13 +33,13 @@
 
 ### Checklist
 
-- [ ] Summary cards: Total Revenue, Total Orders, Avg Order Value
-- [ ] Revenue trend chart (Recharts LineChart)
-- [ ] Data scoped based on role:
+- [x] Summary cards: Total Revenue, Total Orders, Avg Order Value
+- [x] Revenue trend chart (Recharts LineChart)
+- [x] Data scoped based on role:
   - Superadmin: aggregated across all merchants
   - Admin Merchant: own merchant only
-- [ ] Loading skeletons while data is fetching
-- [ ] Handle empty state gracefully
+- [x] Loading skeletons while data is fetching
+- [x] Handle empty state gracefully
 
 ---
 
@@ -47,14 +47,14 @@
 
 ### Checklist
 
-- [ ] Create `src/components/merchants/MerchantTable.tsx` — table listing all merchants
-- [ ] Create `src/components/merchants/MerchantForm.tsx` — add/edit merchant form (dialog)
-- [ ] Create `src/components/merchants/MerchantDeleteDialog.tsx` — delete confirmation
-- [ ] Add new merchant functionality
-- [ ] Edit merchant details (inline or dialog)
-- [ ] Delete merchant with confirmation dialog
-- [ ] Loading skeletons for table
-- [ ] Empty state when no merchants exist
+- [x] Create `src/components/merchants/MerchantTable.tsx` — table listing all merchants
+- [x] Create `src/components/merchants/MerchantForm.tsx` — add/edit merchant form (dialog)
+- [x] Create `src/components/merchants/MerchantDeleteDialog.tsx` — delete confirmation
+- [x] Add new merchant functionality
+- [x] Edit merchant details (inline or dialog)
+- [x] Delete merchant with confirmation dialog
+- [x] Loading skeletons for table
+- [x] Empty state when no merchants exist
 
 ---
 
@@ -62,16 +62,16 @@
 
 ### Checklist
 
-- [ ] Create `src/components/users/UserTable.tsx` — user list table
-- [ ] Create `src/components/users/UserForm.tsx` — add/edit user form (dialog)
-- [ ] Create `src/components/users/UserDeleteDialog.tsx` — delete confirmation
-- [ ] **Superadmin**: view & manage all users across all merchants
-- [ ] **Admin Merchant**: view & manage cashier users within own merchant only
-- [ ] Add user with role assignment
-- [ ] Edit user details
-- [ ] Delete user with confirmation
-- [ ] Role-based filtering of visible users
-- [ ] Loading skeletons and empty state
+- [x] Create `src/components/users/UserTable.tsx` — user list table
+- [x] Create `src/components/users/UserForm.tsx` — add/edit user form (dialog)
+- [x] Create `src/components/users/UserDeleteDialog.tsx` — delete confirmation
+- [x] **Superadmin**: view & manage all users across all merchants
+- [x] **Admin Merchant**: view & manage cashier users within own merchant only
+- [x] Add user with role assignment
+- [x] Edit user details
+- [x] Delete user with confirmation
+- [x] Role-based filtering of visible users
+- [x] Loading skeletons and empty state
 
 ---
 
@@ -79,16 +79,16 @@
 
 ### Checklist
 
-- [ ] Create `src/components/products/ProductTable.tsx` — product list table
-- [ ] Create `src/components/products/ProductForm.tsx` — add/edit product form (dialog)
-- [ ] Create `src/components/products/ProductDeleteDialog.tsx` — delete confirmation
-- [ ] **Superadmin**: all products with merchant filter/selector
-- [ ] **Admin Merchant**: own merchant's products only
-- [ ] Add product via modal dialog form
-- [ ] Edit existing product
-- [ ] Delete product with confirmation dialog
-- [ ] Support for multiple prices (`prices` array field)
-- [ ] Loading skeletons and empty state
+- [x] Create `src/components/products/ProductTable.tsx` — product list table
+- [x] Create `src/components/products/ProductForm.tsx` — add/edit product form (dialog)
+- [x] Create `src/components/products/ProductDeleteDialog.tsx` — delete confirmation
+- [x] **Superadmin**: all products with merchant filter/selector
+- [x] **Admin Merchant**: own merchant's products only
+- [x] Add product via modal dialog form
+- [x] Edit existing product
+- [x] Delete product with confirmation dialog
+- [x] Support for multiple prices (`prices` array field)
+- [x] Loading skeletons and empty state
 
 ---
 
@@ -96,16 +96,16 @@
 
 ### Checklist
 
-- [ ] Create `src/components/sales/SalesSummaryCards.tsx` — KPI cards
-- [ ] Create `src/components/sales/SalesChart.tsx` — revenue trend line chart
-- [ ] Create `src/components/sales/SalesTable.tsx` — detailed transaction table
-- [ ] Summary cards: Total Revenue, Total Orders, Avg Order Value
-- [ ] Line chart: Revenue trend by month (Recharts)
-- [ ] Detailed sales transaction table
-- [ ] **Superadmin**: all merchants with merchant filter
-- [ ] **Admin Merchant**: own merchant's data only
-- [ ] Date range filtering
-- [ ] Loading skeletons and empty state
+- [x] Create `src/components/sales/SalesSummaryCards.tsx` — KPI cards
+- [x] Create `src/components/sales/SalesChart.tsx` — revenue trend line chart
+- [x] Create `src/components/sales/SalesTable.tsx` — detailed transaction table
+- [x] Summary cards: Total Revenue, Total Orders, Avg Order Value
+- [x] Line chart: Revenue trend by month (Recharts)
+- [x] Detailed sales transaction table
+- [x] **Superadmin**: all merchants with merchant filter
+- [x] **Admin Merchant**: own merchant's data only
+- [x] Date range filtering
+- [x] Loading skeletons and empty state
 
 ---
 
@@ -153,15 +153,15 @@
 
 ## Overall Phase 5 Checklist
 
-- [ ] All pages render without errors
-- [ ] Navigation between pages works correctly
-- [ ] Role-based content scoping verified for both Superadmin and Admin
-- [ ] CRUD operations work for Merchants, Users, and Products
-- [ ] Sales data displays correctly with charts and tables
-- [ ] Responsive layout works on mobile and desktop
-- [ ] All component files follow PascalCase naming
-- [ ] All hook files follow camelCase with `use` prefix
-- [ ] No usage of `any` type in codebase
-- [ ] No inline `style` attributes — only Tailwind classes
-- [ ] All `onSnapshot` listeners have cleanup functions
-- [ ] No prop drilling beyond 2 levels
+- [x] All pages render without errors
+- [x] Navigation between pages works correctly
+- [x] Role-based content scoping verified for both Superadmin and Admin
+- [x] CRUD operations work for Merchants, Users, and Products
+- [x] Sales data displays correctly with charts and tables
+- [x] Responsive layout works on mobile and desktop
+- [x] All component files follow PascalCase naming
+- [x] All hook files follow camelCase with `use` prefix
+- [x] No usage of `any` type in codebase
+- [x] No inline `style` attributes — only Tailwind classes
+- [x] All `onSnapshot` listeners have cleanup functions
+- [x] No prop drilling beyond 2 levels
