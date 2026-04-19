@@ -21,7 +21,8 @@ A centralized web application for managing merchants, products, users, and sales
 | 4 | Data Model (Firestore) | [phase-4-data-model.md](./phase-4-data-model.md) |
 | 5 | Feature & Page Development | [phase-5-feature-page-development.md](./phase-5-feature-page-development.md) |
 | 6 | Firebase Security Rules | [phase-6-firebase-security-rules.md](./phase-6-firebase-security-rules.md) |
-| 7 | Conventions | [phase-7-conventions.md](./phase-7-conventions.md) |
+
+> **Note:** Conventions (naming, TypeScript, component, hook, and Firestore best practices) are embedded directly within each phase rather than in a separate document.
 
 ---
 

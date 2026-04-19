@@ -49,6 +49,23 @@ sheet · dropdown-menu · avatar · separator · skeleton
 
 ---
 
+## Conventions for This Phase
+
+### File & Folder Naming
+
+| Entity | Convention | Example |
+|---|---|---|
+| Utility files | camelCase | `utils.ts`, `firebase.ts` |
+| Folder names | camelCase | `components/`, `hooks/`, `lib/` |
+
+### Git
+
+- Never commit `.env` or any file containing secrets
+- Branch naming: `feat/`, `fix/`, `chore/` prefixes — e.g., `feat/setup-firebase`
+- Commit messages: imperative mood — e.g., `Add Firebase configuration`
+
+---
+
 ## Overall Phase 1 Checklist
 
 - [x] Project runs with `npm run dev` without errors

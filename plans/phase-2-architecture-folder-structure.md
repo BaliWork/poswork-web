@@ -62,6 +62,32 @@ src/
 
 ---
 
+## Conventions for This Phase
+
+### File & Folder Naming
+
+| Entity | Convention | Example |
+|---|---|---|
+| React component | PascalCase | `ProductTable.tsx`, `MerchantForm.tsx` |
+| Pages | PascalCase + `Page` suffix | `LoginPage.tsx`, `DashboardPage.tsx` |
+| Hooks | camelCase + `use` prefix | `useProducts.ts`, `useSales.ts` |
+| Context | PascalCase + `Context` suffix | `AuthContext.tsx` |
+| Utility | camelCase | `utils.ts`, `firebase.ts` |
+| Folder | camelCase | `components/`, `hooks/`, `pages/`, `lib/` |
+
+### Naming Conventions
+
+| Entity | Convention | Example |
+|---|---|---|
+| React component | PascalCase | `ProductTable` |
+| Function / variable | camelCase | `handleDelete`, `merchantId` |
+| Module-level constant | UPPER_SNAKE_CASE | `MAX_RETRY_COUNT` |
+| CSS class (Tailwind) | kebab-case (auto) | `text-sm`, `rounded-lg` |
+| Firestore collection | kebab-case | `merchants`, `products` |
+| Firestore document field | camelCase | `merchantId`, `createdAt` |
+
+---
+
 ## Checklist
 
 - [ ] Create `src/components/layout/` folder
@@ -74,3 +100,4 @@ src/
 - [ ] Create `src/hooks/` folder
 - [ ] Create `src/lib/` folder with `firebase.ts` and `utils.ts`
 - [ ] Verify all folders are in place and the project compiles
+- [ ] All file and folder names follow the naming conventions above

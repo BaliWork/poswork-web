@@ -72,3 +72,28 @@
 - [ ] Create `src/hooks/useUsers.ts` — fetch users (scoped by role/merchant) with `onSnapshot`
 - [ ] Each hook returns `{ data, loading, error }`
 - [ ] Each hook cleans up `onSnapshot` listener on unmount
+
+---
+
+## Conventions for This Phase
+
+### TypeScript
+
+- Use `interface` for object shapes (props, data models)
+- Use `type` for unions, intersections, and aliases
+- Avoid `any` — use `unknown` and narrow types explicitly
+- Export types/interfaces from the file where they are defined
+- Use strict null checks; never assume a value is non-null without verification
+
+### Hook Conventions
+
+- Each custom hook wraps a single concern (e.g., one Firestore collection)
+- Always clean up `onSnapshot` listeners in the `useEffect` return function
+- Return `{ data, loading, error }` from every hook
+
+### Firestore Conventions
+
+- Always scope queries to the user's merchant when the role is `admin`
+- Use `where()` before `orderBy()` to satisfy Firestore index requirements
+- Use `onSnapshot` for lists; use `getDoc` for single document lookups that don't need real-time updates
+- Store currency values as integers (rupiah, not decimals) to avoid floating-point errors

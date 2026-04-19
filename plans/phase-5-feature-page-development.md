@@ -109,6 +109,48 @@
 
 ---
 
+## Conventions for This Phase
+
+### Component Conventions
+
+- One component per file
+- Keep components small and single-purpose; extract sub-components when a file exceeds ~150 lines
+- Use ShadCN UI as the base; do not build custom UI primitives from scratch
+- Apply Tailwind utility classes directly; avoid inline `style` attributes
+- Avoid prop drilling more than 2 levels — use context instead
+
+### Hook Conventions
+
+- Each custom hook wraps a single concern (e.g., one Firestore collection)
+- Always clean up `onSnapshot` listeners in the `useEffect` return function
+- Return `{ data, loading, error }` from every hook
+
+### Firestore Conventions
+
+- Always scope queries to the user's merchant when the role is `admin`
+- Use `where()` before `orderBy()` to satisfy Firestore index requirements
+- Use `onSnapshot` for lists; use `getDoc` for single document lookups that don't need real-time updates
+- Store currency values as integers (rupiah, not decimals) to avoid floating-point errors
+- Implement Firestore pagination with `startAfter()` + `limit()` for large datasets
+
+### Naming Conventions
+
+| Entity | Convention | Example |
+|---|---|---|
+| React component | PascalCase | `ProductTable` |
+| Function / variable | camelCase | `handleDelete`, `merchantId` |
+| Module-level constant | UPPER_SNAKE_CASE | `MAX_RETRY_COUNT` |
+| Firestore collection | kebab-case | `merchants`, `products` |
+| Firestore document field | camelCase | `merchantId`, `createdAt` |
+
+### State Management
+
+- Use React Context only for truly global state (auth, current user role)
+- Use local `useState` / `useReducer` for component-level state
+- Do not put server data in context — fetch it in hooks close to where it is used
+
+---
+
 ## Overall Phase 5 Checklist
 
 - [ ] All pages render without errors
@@ -117,3 +159,9 @@
 - [ ] CRUD operations work for Merchants, Users, and Products
 - [ ] Sales data displays correctly with charts and tables
 - [ ] Responsive layout works on mobile and desktop
+- [ ] All component files follow PascalCase naming
+- [ ] All hook files follow camelCase with `use` prefix
+- [ ] No usage of `any` type in codebase
+- [ ] No inline `style` attributes — only Tailwind classes
+- [ ] All `onSnapshot` listeners have cleanup functions
+- [ ] No prop drilling beyond 2 levels

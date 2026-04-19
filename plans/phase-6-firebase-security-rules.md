@@ -81,3 +81,19 @@ service cloud.firestore {
 - [ ] Validate input on client side **and** in Firestore Security Rules
 - [ ] Ensure no open rules remain from test mode
 - [ ] Test rules using Firebase Emulator or Rules Playground
+
+---
+
+## Conventions for This Phase
+
+### Firestore Conventions
+
+- Always scope queries to the user's merchant when the role is `admin`
+- Use `where()` before `orderBy()` to satisfy Firestore index requirements
+- Create Firestore indexes for compound queries (e.g., filter by category + order by date)
+
+### Security Conventions
+
+- Validate user input on both client and Firestore Security Rules level
+- Never leave Firestore in test mode for production
+- Keep Firebase API keys in `.env` and never expose them in public repositories

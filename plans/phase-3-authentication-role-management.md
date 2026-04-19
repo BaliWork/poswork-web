@@ -73,3 +73,28 @@
 - [ ] Cashier login attempt is blocked with error message
 - [ ] Invalid credentials show proper error message
 - [ ] Unauthenticated access redirects to `/login`
+
+---
+
+## Conventions for This Phase
+
+### TypeScript
+
+- Use `interface` for object shapes (props, data models)
+- Use `type` for unions, intersections, and aliases
+- Avoid `any` — use `unknown` and narrow types explicitly
+- Export types/interfaces from the file where they are defined
+- Use strict null checks; never assume a value is non-null without verification
+
+### Component Conventions
+
+- One component per file
+- Keep components small and single-purpose; extract sub-components when a file exceeds ~150 lines
+- Use ShadCN UI as the base; do not build custom UI primitives from scratch
+- Apply Tailwind utility classes directly; avoid inline `style` attributes
+
+### State Management
+
+- Use React Context only for truly global state (auth, current user role)
+- Use local `useState` / `useReducer` for component-level state
+- Avoid prop drilling more than 2 levels — use context instead
