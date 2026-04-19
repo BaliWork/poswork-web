@@ -16,4 +16,9 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
+// Secondary app instance khusus untuk membuat Auth user baru
+// tanpa mengganggu sesi login admin yang sedang aktif.
+const secondaryApp = initializeApp(firebaseConfig, "secondary");
+export const secondaryAuth = getAuth(secondaryApp);
+
 export default app;
