@@ -90,14 +90,14 @@ src/
 
 ## Checklist
 
-- [ ] Create `src/components/layout/` folder
-- [ ] Create `src/components/merchants/` folder
-- [ ] Create `src/components/users/` folder
-- [ ] Create `src/components/products/` folder
-- [ ] Create `src/components/sales/` folder
-- [ ] Create `src/pages/` folder
-- [ ] Create `src/context/` folder
-- [ ] Create `src/hooks/` folder
-- [ ] Create `src/lib/` folder with `firebase.ts` and `utils.ts`
-- [ ] Verify all folders are in place and the project compiles
-- [ ] All file and folder names follow the naming conventions above
+- [x] Create `src/components/layout/` folder
+- [x] Create `src/components/merchants/` folder
+- [x] Create `src/components/users/` folder
+- [x] Create `src/components/products/` folder
+- [x] Create `src/components/sales/` folder
+- [x] Create `src/pages/` folder
+- [x] Create `src/context/` folder
+- [x] Create `src/hooks/` folder
+- [x] Create `src/lib/` folder with `firebase.ts` and `utils.ts`
+- [x] Verify all folders are in place and the project compiles
+- [x] All file and folder names follow the naming conventions above
