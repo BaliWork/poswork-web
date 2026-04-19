@@ -31,34 +31,34 @@
 
 ### AuthContext
 
-- [ ] Create `src/context/AuthContext.tsx`
-- [ ] Implement `AuthProvider` with Firebase `onAuthStateChanged` listener
-- [ ] Fetch user document from `users` collection after auth state change
-- [ ] Store `user`, `role`, and `merchant` in context state
-- [ ] Expose `login()`, `logout()`, `loading`, and `error` from context
-- [ ] Block cashier role: sign out immediately with error message
+- [x] Create `src/context/AuthContext.tsx`
+- [x] Implement `AuthProvider` with Firebase `onAuthStateChanged` listener
+- [x] Fetch user document from `users` collection after auth state change
+- [x] Store `user`, `role`, and `merchant` in context state
+- [x] Expose `login()`, `logout()`, `loading`, and `error` from context
+- [x] Block cashier role: sign out immediately with error message
 
 ### Login Page
 
-- [ ] Create `src/pages/LoginPage.tsx`
-- [ ] Build email + password form using ShadCN Input and Button
-- [ ] Add client-side validation (required fields, email format)
-- [ ] Call `signInWithEmailAndPassword` from Firebase Auth
-- [ ] Handle and display Firebase Auth error messages
-- [ ] Redirect to Dashboard on successful login
+- [x] Create `src/pages/LoginPage.tsx`
+- [x] Build email + password form using ShadCN Input and Button
+- [x] Add client-side validation (required fields, email format)
+- [x] Call `signInWithEmailAndPassword` from Firebase Auth
+- [x] Handle and display Firebase Auth error messages
+- [x] Redirect to Dashboard on successful login
 
 ### Route Guard
 
-- [ ] Create `RoleGuard` component
-- [ ] Accept `allowedRoles` prop to define which roles can access a route
-- [ ] Redirect unauthorized roles to Dashboard (`/`)
-- [ ] Redirect unauthenticated users to Login (`/login`)
+- [x] Create `RoleGuard` component
+- [x] Accept `allowedRoles` prop to define which roles can access a route
+- [x] Redirect unauthorized roles to Dashboard (`/`)
+- [x] Redirect unauthenticated users to Login (`/login`)
 
 ### Routing Setup
 
-- [ ] Configure `react-router-dom` routes in `App.tsx`
-- [ ] Wrap protected routes with `RoleGuard`
-- [ ] Define route permissions:
+- [x] Configure `react-router-dom` routes in `App.tsx`
+- [x] Wrap protected routes with `RoleGuard`
+- [x] Define route permissions:
   - `/login` — public (redirect if already logged in)
   - `/` — Superadmin, Admin
   - `/merchants` — Superadmin only
