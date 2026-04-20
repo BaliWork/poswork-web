@@ -13,6 +13,7 @@
 - [x] Create `src/components/layout/Header.tsx` — top header bar with user info and logout
 - [x] Sidebar hides "Merchants" link for Admin Merchant role
 - [x] Layout is responsive (collapsible sidebar on mobile)
+- [x] Sidebar is fixed/sticky — does not scroll with main content
 
 ---
 
@@ -55,6 +56,7 @@
 - [x] Delete merchant with confirmation dialog
 - [x] Loading skeletons for table
 - [x] Empty state when no merchants exist
+- [x] Upgrade to `@tanstack/react-table` data-table pattern (rounded border, sorting, pagination)
 
 ---
 
@@ -72,6 +74,7 @@
 - [x] Delete user with confirmation
 - [x] Role-based filtering of visible users
 - [x] Loading skeletons and empty state
+- [x] Upgrade to `@tanstack/react-table` data-table pattern (search filter, sorting, pagination)
 
 ---
 
@@ -89,6 +92,7 @@
 - [x] Delete product with confirmation dialog
 - [x] Support for multiple prices (`prices` array field)
 - [x] Loading skeletons and empty state
+- [x] Upgrade to `@tanstack/react-table` data-table pattern (search filter, sorting, pagination)
 
 ---
 
@@ -106,6 +110,7 @@
 - [x] **Admin Merchant**: own merchant's data only
 - [x] Date range filtering
 - [x] Loading skeletons and empty state
+- [x] Upgrade to `@tanstack/react-table` data-table pattern (search filter, sorting, pagination)
 
 ---
 
