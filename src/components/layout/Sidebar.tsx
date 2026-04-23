@@ -8,8 +8,19 @@ import {
   BarChart3,
   LogOut,
   X,
+  ChevronsUpDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface SidebarProps {
   open: boolean;
@@ -83,16 +94,54 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
 
         {/* Footer */}
         <div className="border-t p-3">
-          <div className="mb-2 px-3 text-xs text-muted-foreground truncate">
-            {user?.name} — <span className="capitalize">{user?.role}</span>
-          </div>
-          <button
-            onClick={logout}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-          >
-            <LogOut className="size-4" />
-            Keluar
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-sidebar-accent transition-colors outline-none">
+              <Avatar size="default">
+                <AvatarFallback className="bg-sidebar-primary text-sidebar-primary-foreground text-xs font-semibold">
+                  {user?.name
+                    ?.split(" ")
+                    .map((w) => w[0])
+                    .slice(0, 2)
+                    .join("")
+                    .toUpperCase() ?? "?"}
+                </AvatarFallback>
+              </Avatar>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium">{user?.name}</p>
+                <p className="truncate text-xs text-muted-foreground">{user?.email}</p>
+              </div>
+              <ChevronsUpDown className="size-4 text-muted-foreground" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent side="top" sideOffset={8} className="w-[--radix-dropdown-menu-trigger-width] min-w-56">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>
+                  <div className="flex items-center gap-3 py-1">
+                    <Avatar size="default">
+                      <AvatarFallback className="bg-sidebar-primary text-sidebar-primary-foreground text-xs font-semibold">
+                        {user?.name
+                          ?.split(" ")
+                          .map((w) => w[0])
+                          .slice(0, 2)
+                          .join("")
+                          .toUpperCase() ?? "?"}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{user?.name}</p>
+                      <p className="truncate text-xs text-muted-foreground font-normal">{user?.email}</p>
+                    </div>
+                  </div>
+                </DropdownMenuLabel>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem onClick={logout}>
+                  <LogOut className="size-4" />
+                  Keluar
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </aside>
     </>
