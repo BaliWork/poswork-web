@@ -88,7 +88,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function login(email: string, password: string) {
     setError(null);
-    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err: unknown) {
@@ -105,7 +104,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         default:
           setError("Terjadi kesalahan saat login.");
       }
-      setLoading(false);
     }
   }
 

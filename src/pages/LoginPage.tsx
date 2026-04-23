@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,11 +7,12 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 export default function LoginPage() {
-  const { login, error, loading } = useAuth();
+  const { login, error } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function validateForm(): boolean {
     if (!email.trim() || !password.trim()) {
@@ -30,7 +31,9 @@ export default function LoginPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!validateForm()) return;
+    setIsSubmitting(true);
     await login(email, password);
+    setIsSubmitting(false);
     // Navigation is handled by App.tsx route guard when user state changes
   }
 
@@ -93,8 +96,15 @@ export default function LoginPage() {
                   <p className="text-sm text-destructive">{displayError}</p>
                 )}
 
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Memproses..." : "Masuk"}
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="animate-spin" />
+                      Memproses...
+                    </>
+                  ) : (
+                    "Masuk"
+                  )}
                 </Button>
               </div>
             </form>
