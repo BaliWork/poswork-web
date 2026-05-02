@@ -28,6 +28,11 @@ service cloud.firestore {
         allow read, write: if isSuperadmin();
         allow read: if isAdminOfMerchant(merchantId);
       }
+
+      match /expenses/{expenseId} {
+        allow read, write: if isSuperadmin();
+        allow read, write: if isAdminOfMerchant(merchantId);
+      }
     }
   }
 }

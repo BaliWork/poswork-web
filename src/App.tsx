@@ -8,6 +8,7 @@ import MerchantsPage from "@/pages/MerchantsPage";
 import UsersPage from "@/pages/UsersPage";
 import ProductsPage from "@/pages/ProductsPage";
 import SalesPage from "@/pages/SalesPage";
+import ExpensesPage from "@/pages/ExpensesPage";
 
 function AppRoutes() {
   const { user, loading } = useAuth();
@@ -45,6 +46,7 @@ function AppRoutes() {
         <Route path="/users" element={<UsersPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/sales" element={<SalesPage />} />
+        <Route path="/expenses" element={<ExpensesPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

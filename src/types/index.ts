@@ -74,3 +74,15 @@ export interface Sale {
   closing_balance?: ClosingBalance;
   orders: Order[];
 }
+
+export interface Expense {
+  id: string;
+  description: string;
+  category: string;
+  amount: number;
+  date: string;
+  note?: string;
+  createdAt: string;
+}
+
+export type ExpenseFormValues = Omit<Expense, "id" | "createdAt">;

@@ -6,6 +6,7 @@ import {
   Users,
   Package,
   BarChart3,
+  TrendingDown,
   LogOut,
   X,
   ChevronsUpDown,
@@ -33,6 +34,7 @@ const navItems = [
   { to: "/users", label: "Users", icon: Users, roles: ["superadmin", "admin"] },
   { to: "/products", label: "Produk", icon: Package, roles: ["superadmin", "admin"] },
   { to: "/sales", label: "Penjualan", icon: BarChart3, roles: ["superadmin", "admin"] },
+  { to: "/expenses", label: "Pengeluaran", icon: TrendingDown, roles: ["superadmin", "admin"] },
 ];
 
 export default function Sidebar({ open, onClose }: SidebarProps) {

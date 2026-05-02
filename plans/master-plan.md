@@ -21,6 +21,8 @@ A centralized web application for managing merchants, products, users, and sales
 | 4 | Data Model (Firestore) | [phase-4-data-model.md](./phase-4-data-model.md) |
 | 5 | Feature & Page Development | [phase-5-feature-page-development.md](./phase-5-feature-page-development.md) |
 | 6 | Firebase Security Rules | [phase-6-firebase-security-rules.md](./phase-6-firebase-security-rules.md) |
+| 7 | Expenses (Pengeluaran) Feature | [phase-7-expenses.md](./phase-7-expenses.md) |
+| 8 | Profit & Loss Report | [phase-8-profit-loss-report.md](./phase-8-profit-loss-report.md) |
 
 > **Note:** Conventions (naming, TypeScript, component, hook, and Firestore best practices) are embedded directly within each phase rather than in a separate document.
 
@@ -37,6 +39,8 @@ A centralized web application for managing merchants, products, users, and sales
 | Manage Cashier Users | ✅ | ✅ (own) | — |
 | Manage Products | ✅ (all) | ✅ (own) | — |
 | View Sales Data | ✅ (all) | ✅ (own) | — |
+| Manage Expenses | ✅ (all) | ✅ (own) | — |
+| View Profit & Loss Report | ✅ (all) | ✅ (own) | — |
 
 ---
 
