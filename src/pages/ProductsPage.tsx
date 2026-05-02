@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import ProductTable from "@/components/products/ProductTable";
 import ProductForm from "@/components/products/ProductForm";
 import ProductDeleteDialog from "@/components/products/ProductDeleteDialog";
@@ -75,18 +75,31 @@ export default function ProductsPage() {
         <h1 className="text-xl font-bold">Produk</h1>
         <div className="flex items-center gap-2">
           {isSuperadmin && (
-            <Select value={selectedMerchant} onValueChange={(v) => setSelectedMerchant(v ?? "")}>
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Pilih merchant" />
-              </SelectTrigger>
-              <SelectContent>
-                {merchants.map((m) => (
-                  <SelectItem key={m.id} value={m.id}>
-                    {m.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex items-center gap-1">
+              <Select value={selectedMerchant} onValueChange={(v) => setSelectedMerchant(v ?? "")}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder="Pilih merchant" />
+                </SelectTrigger>
+                <SelectContent>
+                  {merchants.map((m) => (
+                    <SelectItem key={m.id} value={m.id}>
+                      {m.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {selectedMerchant && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="size-9 shrink-0 text-muted-foreground hover:text-foreground"
+                  onClick={() => setSelectedMerchant("")}
+                  aria-label="Hapus pilihan merchant"
+                >
+                  <X className="size-4" />
+                </Button>
+              )}
+            </div>
           )}
           <Button onClick={handleAdd} disabled={!activeMerchant}>
             <Plus className="mr-1 size-4" />
