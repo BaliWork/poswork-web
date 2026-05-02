@@ -49,38 +49,38 @@ service cloud.firestore {
 
 ### Rule Deployment
 
-- [ ] Copy rules to Firebase Console → Firestore → Rules
-- [ ] Publish rules
-- [ ] Verify rules compile without errors in the Firebase Console
+- [x] Copy rules to Firebase Console → Firestore → Rules
+- [x] Publish rules
+- [x] Verify rules compile without errors in the Firebase Console
 
 ### Access Verification — Superadmin
 
-- [ ] Can read and write all documents in `users` collection
-- [ ] Can read and write all documents in `merchants` collection
-- [ ] Can read and write all products subcollections
-- [ ] Can read and write all sales subcollections
+- [x] Can read and write all documents in `users` collection
+- [x] Can read and write all documents in `merchants` collection
+- [x] Can read and write all products subcollections
+- [x] Can read and write all sales subcollections
 
 ### Access Verification — Admin Merchant
 
-- [ ] Can read cashier users within own merchant
-- [ ] Can write (create/update) cashier users within own merchant
-- [ ] Cannot read or write users from other merchants
-- [ ] Can read own merchant document
-- [ ] Cannot write to merchant documents
-- [ ] Can read and write products within own merchant
-- [ ] Can read sales within own merchant
-- [ ] Cannot access other merchants' products or sales
+- [x] Can read cashier users within own merchant
+- [x] Can write (create/update) cashier users within own merchant
+- [x] Cannot read or write users from other merchants
+- [x] Can read own merchant document
+- [x] Cannot write to merchant documents
+- [x] Can read and write products within own merchant
+- [x] Can read sales within own merchant
+- [x] Cannot access other merchants' products or sales
 
 ### Access Verification — Unauthenticated
 
-- [ ] Cannot read or write any document
-- [ ] All requests are denied
+- [x] Cannot read or write any document
+- [x] All requests are denied
 
 ### Security Best Practices
 
-- [ ] Validate input on client side **and** in Firestore Security Rules
-- [ ] Ensure no open rules remain from test mode
-- [ ] Test rules using Firebase Emulator or Rules Playground
+- [x] Validate input on client side **and** in Firestore Security Rules
+- [x] Ensure no open rules remain from test mode
+- [x] Test rules using Firebase Emulator or Rules Playground
 
 ---
 
