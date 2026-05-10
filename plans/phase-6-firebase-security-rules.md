@@ -78,7 +78,7 @@ service cloud.firestore {
 - [x] Copy rules to Firebase Console → Firestore → Rules
 - [x] Publish rules
 - [x] Verify rules compile without errors in the Firebase Console
-- [ ] Update rules to reflect revised Supervisor permissions (no cashiers, no products, sales read-only)
+- [x] Update rules to reflect revised Supervisor permissions (no cashiers, no products, sales read-only)
 
 ### Access Verification — Superadmin
 
@@ -86,35 +86,35 @@ service cloud.firestore {
 - [x] Can read and write all documents in `merchants` collection
 - [x] Can read and write all products subcollections
 - [x] Can read and write all sales subcollections
-- [ ] Can read and write all cashiers subcollections
-- [ ] Can read and write all expenses subcollections
+- [x] Can read and write all cashiers subcollections
+- [x] Can read and write all expenses subcollections
 
 ### Access Verification — Admin Merchant
 
 - [x] Can read cashier users within own merchant
-- [ ] Update: Admin can only read/write **supervisor** users (not cashiers) within their own merchant
-- [ ] Admin cannot create users with `role === 'admin'` — enforced at app level (role selector restricted)
-- [ ] Admin can create at most **1 supervisor** per merchant — enforced at app level
+- [x] Update: Admin can only read/write **supervisor** users (not cashiers) within their own merchant
+- [x] Admin cannot create users with `role === 'admin'` — enforced at app level (role selector restricted)
+- [x] Admin can create at most **1 supervisor** per merchant — enforced at app level
 - [x] Cannot read or write users from other merchants
 - [x] Can read own merchant document
 - [x] Cannot write to merchant documents
 - [x] Can read and write products within own merchant
 - [x] Can read sales within own merchant
 - [x] Cannot access other merchants' products or sales
-- [ ] Can read and write cashiers within own merchant (`cashiers` subcollection)
-- [ ] Can read and write expenses within own merchant
+- [x] Can read and write cashiers within own merchant (`cashiers` subcollection)
+- [x] Can read and write expenses within own merchant
 
 ### Access Verification — Supervisor
 
-- [ ] Can read own user profile only (own `users/{uid}` document)
-- [ ] Cannot read or write other user documents
-- [ ] Can read own merchant document
-- [ ] Cannot write to merchant documents
-- [ ] **Cannot** read or write products subcollection
-- [ ] Can read sales within own merchant (read-only)
-- [ ] **Cannot** read or write cashiers subcollection
-- [ ] Can read and write expenses within own merchant
-- [ ] Cannot access other merchants' data
+- [x] Can read own user profile only (own `users/{uid}` document)
+- [x] Cannot read or write other user documents
+- [x] Can read own merchant document
+- [x] Cannot write to merchant documents
+- [x] **Cannot** read or write products subcollection
+- [x] Can read sales within own merchant (read-only)
+- [x] **Cannot** read or write cashiers subcollection
+- [x] Can read and write expenses within own merchant
+- [x] Cannot access other merchants' data
 
 ### Access Verification — Unauthenticated
 
@@ -126,9 +126,9 @@ service cloud.firestore {
 - [x] Validate input on client side **and** in Firestore Security Rules
 - [x] Ensure no open rules remain from test mode
 - [x] Test rules using Firebase Emulator or Rules Playground
-- [ ] Verify that the `cashiers` subcollection is inaccessible to Supervisor and unauthenticated users
-- [ ] Verify that cashier PINs can only be read by Superadmin and Admin of the corresponding merchant
-- [ ] Verify that Supervisor cannot write to the `products` subcollection
+- [x] Verify that the `cashiers` subcollection is inaccessible to Supervisor and unauthenticated users
+- [x] Verify that cashier PINs can only be read by Superadmin and Admin of the corresponding merchant
+- [x] Verify that Supervisor cannot write to the `products` subcollection
 
 ---
 

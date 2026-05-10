@@ -6,37 +6,52 @@ service cloud.firestore {
     function getUser() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
     function isSuperadmin() { return isSignedIn() && getUser().role == 'superadmin'; }
     function isAdmin() { return isSignedIn() && getUser().role == 'admin'; }
+    function isSupervisor() { return isSignedIn() && getUser().role == 'supervisor'; }
     function isAdminOfMerchant(merchantId) { return isAdmin() && getUser().merchant == merchantId; }
+    function isSupervisorOfMerchant(merchantId) { return isSupervisor() && getUser().merchant == merchantId; }
 
+    // users collection
+    // Superadmin: full access
+    // Admin: can read/write supervisor users within own merchant only
+    // Supervisor: read own profile only
+    // All authenticated users: can read their own profile (required for AuthContext)
     match /users/{userId} {
       allow read, write: if isSuperadmin();
-      allow read: if isSignedIn() && request.auth.uid == userId;
-      allow read: if isAdmin() && resource.data.merchant == getUser().merchant && resource.data.role == 'cashier';
-      allow write: if isAdmin() && request.resource.data.merchant == getUser().merchant && request.resource.data.role == 'cashier';
+      allow read: if isSignedIn() && userId == request.auth.uid;
+      allow read: if isAdmin() && resource.data.merchant == getUser().merchant
+                                && resource.data.role == 'supervisor';
+      allow write: if isAdmin() && request.resource.data.merchant == getUser().merchant
+                                 && request.resource.data.role == 'supervisor';
     }
 
     match /merchants/{merchantId} {
       allow read, write: if isSuperadmin();
-      allow read: if isAdminOfMerchant(merchantId);
+      allow read: if isAdminOfMerchant(merchantId) || isSupervisorOfMerchant(merchantId);
 
+      // products subcollection — admin only (supervisor has no access)
       match /products/{productId} {
         allow read, write: if isSuperadmin();
         allow read, write: if isAdminOfMerchant(merchantId);
       }
 
+      // sales subcollection — supervisor: read-only
       match /sales/{saleDate} {
         allow read, write: if isSuperadmin();
-        allow read: if isAdminOfMerchant(merchantId);
-      }
-
-      match /expenses/{expenseId} {
-        allow read, write: if isSuperadmin();
         allow read, write: if isAdminOfMerchant(merchantId);
+        allow read: if isSupervisorOfMerchant(merchantId);
       }
 
+      // cashiers subcollection — admin only (supervisor has no access)
       match /cashiers/{pinCode} {
         allow read, write: if isSuperadmin();
         allow read, write: if isAdminOfMerchant(merchantId);
+      }
+
+      // expenses subcollection — supervisor: full read/write
+      match /expenses/{expenseId} {
+        allow read, write: if isSuperadmin();
+        allow read, write: if isAdminOfMerchant(merchantId);
+        allow read, write: if isSupervisorOfMerchant(merchantId);
       }
     }
   }
