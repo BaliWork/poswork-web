@@ -48,7 +48,7 @@ export default function UserForm({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<UserRole>("cashier");
+  const [role, setRole] = useState<UserRole>("supervisor");
   const [merchant, setMerchant] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +64,7 @@ export default function UserForm({
       setName("");
       setEmail("");
       setPassword("");
-      setRole(isSuperadmin ? "admin" : "cashier");
+      setRole(isSuperadmin ? "admin" : "supervisor");
       setMerchant(currentUser?.merchant || "");
     }
     setError(null);
@@ -107,9 +107,9 @@ export default function UserForm({
     ? [
         { value: "superadmin", label: "Superadmin" },
         { value: "admin", label: "Admin Merchant" },
-        { value: "cashier", label: "Kasir" },
+        { value: "supervisor", label: "Supervisor" },
       ]
-    : [{ value: "cashier", label: "Kasir" }];
+    : [{ value: "supervisor", label: "Supervisor" }];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

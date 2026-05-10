@@ -12,6 +12,7 @@ export function useUsers() {
 
   useEffect(() => {
     if (!currentUser) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setData([]);
       setLoading(false);
       return;

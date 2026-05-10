@@ -20,6 +20,9 @@ export default function UsersPage() {
   const [editUser, setEditUser] = useState<User | null>(null);
   const [deleteUser, setDeleteUser] = useState<User | null>(null);
 
+  const isAdmin = currentUser?.role === "admin";
+  const hasSupervisor = isAdmin && users.some((u) => u.role === "supervisor");
+
   function handleAdd() {
     setEditUser(null);
     setFormOpen(true);
@@ -60,16 +63,20 @@ export default function UsersPage() {
   }
 
   const pageTitle =
-    currentUser?.role === "superadmin" ? "Semua Pengguna" : "Kasir";
+    currentUser?.role === "superadmin" ? "Semua Pengguna" : "Pengguna";
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">{pageTitle}</h1>
-        <Button onClick={handleAdd}>
-          <Plus className="mr-1 size-4" />
-          Tambah
-        </Button>
+        {hasSupervisor ? (
+          <p className="text-sm text-muted-foreground">Supervisor sudah ada.</p>
+        ) : (
+          <Button onClick={handleAdd}>
+            <Plus className="mr-1 size-4" />
+            Tambah
+          </Button>
+        )}
       </div>
       <UserTable
         users={users}

@@ -33,6 +33,11 @@ service cloud.firestore {
         allow read, write: if isSuperadmin();
         allow read, write: if isAdminOfMerchant(merchantId);
       }
+
+      match /cashiers/{pinCode} {
+        allow read, write: if isSuperadmin();
+        allow read, write: if isAdminOfMerchant(merchantId);
+      }
     }
   }
 }

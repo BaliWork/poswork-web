@@ -10,6 +10,7 @@ export function useCashiers(merchantId: string | null) {
 
   useEffect(() => {
     if (!merchantId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setData([]);
       setLoading(false);
       return;

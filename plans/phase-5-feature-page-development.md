@@ -12,8 +12,8 @@
 - [x] Create `src/components/layout/Sidebar.tsx` — navigation sidebar (role-aware menu items)
 - [x] Create `src/components/layout/Header.tsx` — top header bar with user info and logout
 - [x] Sidebar hides "Merchants" link for Admin Merchant role
-- [ ] Sidebar hides "Merchants", "Users", "Cashiers", and "Products" links for the Supervisor role
-- [ ] Sidebar shows "Cashiers" link for Admin only (not Supervisor)
+- [x] Sidebar hides "Merchants", "Users", "Cashiers", and "Products" links for the Supervisor role
+- [x] Sidebar shows "Cashiers" link for Admin only (not Supervisor)
 - [x] Layout is responsive (collapsible sidebar on mobile)
 - [x] Sidebar is fixed/sticky — does not scroll with main content
 
@@ -75,10 +75,10 @@
 - [x] Create `src/components/users/UserDeleteDialog.tsx` — delete confirmation
 - [x] **Superadmin**: view & manage all users (admin + supervisor) across all merchants
 - [x] **Admin Merchant**: view & manage supervisor users within own merchant only
-- [ ] Update filter: Admin Merchant only sees users with `role === 'supervisor'` within their own merchant
-- [ ] Remove cashier display from the Users page — cashiers are moved to the Cashiers page
-- [ ] Enforce 1-supervisor limit: if merchant already has a supervisor, hide "Add" button or show an error for Admin Merchant role
-- [ ] Restrict role selector in UserForm: Admin Merchant can only assign `supervisor` role (not `admin`)
+- [x] Update filter: Admin Merchant only sees users with `role === 'supervisor'` within their own merchant
+- [x] Remove cashier display from the Users page — cashiers are moved to the Cashiers page
+- [x] Enforce 1-supervisor limit: if merchant already has a supervisor, hide "Add" button or show an error for Admin Merchant role
+- [x] Restrict role selector in UserForm: Admin Merchant can only assign `supervisor` role (not `admin`)
 - [x] Add user with role assignment
 - [x] Edit user details
 - [x] Delete user with confirmation
@@ -94,22 +94,22 @@
 
 ### Checklist
 
-- [ ] Create `src/components/cashiers/CashierTable.tsx` — cashier list table (name, PIN, created date)
-- [ ] Create `src/components/cashiers/CashierForm.tsx` — add/edit cashier form (dialog)
-  - [ ] Field: `name` (text)
-  - [ ] Field: `pin` (4-digit numeric, numbers only, min/max 4 digits)
-  - [ ] Validation: PIN must not already be used by another cashier in the same merchant
-  - [ ] Edit: only `name` can be changed — PIN is the document ID and cannot be changed (must delete + recreate)
-- [ ] Create `src/components/cashiers/CashierDeleteDialog.tsx` — delete confirmation
-- [ ] Create `src/hooks/useCashiers.ts` — real-time listener from `merchants/{merchantId}/cashiers`
-- [ ] Create `src/pages/CashiersPage.tsx`
-- [ ] **Superadmin**: view & manage cashiers across all merchants (with merchant filter/selector)
-- [ ] **Admin Merchant**: view & manage cashiers within own merchant only
-- [ ] **Supervisor**: no access — route is blocked
-- [ ] Add new cashier (enter unique PIN)
-- [ ] Delete cashier with confirmation dialog
-- [ ] Loading skeletons and empty state
-- [ ] Data-table pattern with search and pagination
+- [x] Create `src/components/cashiers/CashierTable.tsx` — cashier list table (name, PIN, created date)
+- [x] Create `src/components/cashiers/CashierForm.tsx` — add/edit cashier form (dialog)
+  - [x] Field: `name` (text)
+  - [x] Field: `pin` (4-digit numeric, numbers only, min/max 4 digits)
+  - [x] Validation: PIN must not already be used by another cashier in the same merchant
+  - [x] Edit: only `name` can be changed — PIN is the document ID and cannot be changed (must delete + recreate)
+- [x] Create `src/components/cashiers/CashierDeleteDialog.tsx` — delete confirmation
+- [x] Create `src/hooks/useCashiers.ts` — real-time listener from `merchants/{merchantId}/cashiers`
+- [x] Create `src/pages/CashiersPage.tsx`
+- [x] **Superadmin**: view & manage cashiers across all merchants (with merchant filter/selector)
+- [x] **Admin Merchant**: view & manage cashiers within own merchant only
+- [x] **Supervisor**: no access — route is blocked
+- [x] Add new cashier (enter unique PIN)
+- [x] Delete cashier with confirmation dialog
+- [x] Loading skeletons and empty state
+- [x] Data-table pattern with search and pagination
 
 ---
 
@@ -124,7 +124,7 @@
 - [x] Create `src/components/products/ProductDeleteDialog.tsx` — delete confirmation
 - [x] **Superadmin**: all products with merchant filter/selector
 - [x] **Admin Merchant**: own merchant's products only
-- [ ] Remove Supervisor access — Supervisor does not manage products
+- [x] Remove Supervisor access — Supervisor does not manage products
 - [x] Add product via modal dialog form
 - [x] Edit existing product
 - [x] Delete product with confirmation dialog
@@ -148,7 +148,7 @@
 - [x] Detailed sales transaction table
 - [x] **Superadmin**: all merchants with merchant filter
 - [x] **Admin Merchant**: own merchant's data only
-- [ ] **Supervisor**: own merchant's data only (read-only — no add/edit/delete actions)
+- [x] **Supervisor**: own merchant's data only (read-only — no add/edit/delete actions)
 - [x] Date range filtering
 - [x] Loading skeletons and empty state
 - [x] Upgrade to `@tanstack/react-table` data-table pattern (search filter, sorting, pagination)
@@ -202,9 +202,9 @@
 - [x] All pages render without errors
 - [x] Navigation between pages works correctly
 - [x] Role-based content scoping verified for both Superadmin and Admin
-- [ ] Role-based content scoping verified for Supervisor
+- [x] Role-based content scoping verified for Supervisor
 - [x] CRUD operations work for Merchants, Users, and Products
-- [ ] CRUD operations work for Cashiers (PIN-based, in merchant subcollection)
+- [x] CRUD operations work for Cashiers (PIN-based, in merchant subcollection)
 - [x] Sales data displays correctly with charts and tables
 - [x] Responsive layout works on mobile and desktop
 - [x] All component files follow PascalCase naming
