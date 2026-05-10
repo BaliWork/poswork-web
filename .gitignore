@@ -13,8 +13,10 @@ dist-ssr
 .playwright-mcp
 *.local
 
-# Environment variables
+# Environment variables (flavor-specific, contain secrets)
 .env
+.env.development
+.env.production
 
 # Editor directories and files
 .vscode/*

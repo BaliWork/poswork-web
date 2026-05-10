@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "vite --mode development",
+    "dev:emulator": "vite --mode emulator",
+    "build": "tsc -b && vite build --mode production",
+    "build:dev": "tsc -b && vite build --mode development",
+    "preview": "vite preview --mode production",
+    "preview:dev": "vite preview --mode development",
     "lint": "eslint .",
-    "preview": "vite preview",
     "test": "vitest run",
     "test:seed": "vitest run --reporter=verbose src/tests/seed-firestore.test.ts",
     "test:verify": "vitest run --reporter=verbose src/tests/verify-auth-uid.test.ts"
