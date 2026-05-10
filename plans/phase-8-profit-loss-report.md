@@ -190,17 +190,17 @@ No new rules required — this page reads from existing `sales` and `expenses` s
 
 ## Acceptance Criteria
 
-- [ ] Report page shows Pemasukan, Pengeluaran, and Laba/Rugi Bersih summary cards
-- [ ] Monthly breakdown chart compares revenue vs expenses per month
-- [ ] Monthly breakdown table lists all 12 months with totals
-- [ ] Net profit/loss is calculated correctly as `revenue - expenses`
-- [ ] Negative profit (loss) is visually distinct (red color)
-- [ ] Year selector filters data for the chosen year
-- [ ] Superadmin can switch between merchants
-- [ ] Admin Merchant sees data scoped to their own merchant
-- [ ] Supervisor sees data scoped to their own merchant
-- [ ] Loading state is handled with skeleton components
-- [ ] Currency values are formatted as Rupiah (integer, no decimals)
+- [x] Report page shows Pemasukan, Pengeluaran, and Laba/Rugi Bersih summary cards
+- [x] Monthly breakdown chart compares revenue vs expenses per month
+- [x] Monthly breakdown table lists all 12 months with totals
+- [x] Net profit/loss is calculated correctly as `revenue - expenses`
+- [x] Negative profit (loss) is visually distinct (red color)
+- [x] Year selector filters data for the chosen year
+- [x] Superadmin can switch between merchants
+- [x] Admin Merchant sees data scoped to their own merchant
+- [x] Supervisor sees data scoped to their own merchant
+- [x] Loading state is handled with skeleton components
+- [x] Currency values are formatted as Rupiah (integer, no decimals)
 
 ---
 

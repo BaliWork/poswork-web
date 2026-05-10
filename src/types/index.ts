@@ -95,3 +95,18 @@ export interface Cashier {
 }
 
 export type CashierFormValues = Omit<Cashier, "id" | "createdAt" | "updatedAt">;
+
+export interface ProfitLossSummary {
+  period: string;          // e.g., "2026"
+  totalRevenue: number;    // Total revenue (rupiah)
+  totalExpenses: number;   // Total expenses (rupiah)
+  netProfit: number;       // totalRevenue - totalExpenses (can be negative)
+  isProfit: boolean;       // netProfit >= 0
+}
+
+export interface MonthlyBreakdown {
+  month: string;           // e.g., "Januari"
+  revenue: number;
+  expenses: number;
+  netProfit: number;
+}

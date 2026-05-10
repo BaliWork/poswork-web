@@ -71,7 +71,14 @@ function AppRoutes() {
         />
         <Route path="/sales" element={<SalesPage />} />
         <Route path="/expenses" element={<ExpensesPage />} />
-        <Route path="/reports" element={<ReportsPage />} />
+        <Route
+          path="/reports"
+          element={
+            <RoleGuard allowedRoles={["superadmin", "admin", "supervisor"]}>
+              <ReportsPage />
+            </RoleGuard>
+          }
+        />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
