@@ -9,6 +9,8 @@ import UsersPage from "@/pages/UsersPage";
 import ProductsPage from "@/pages/ProductsPage";
 import SalesPage from "@/pages/SalesPage";
 import ExpensesPage from "@/pages/ExpensesPage";
+import CashiersPage from "@/pages/CashiersPage";
+import ReportsPage from "@/pages/ReportsPage";
 
 function AppRoutes() {
   const { user, loading } = useAuth();
@@ -29,7 +31,7 @@ function AppRoutes() {
       />
       <Route
         element={
-          <RoleGuard allowedRoles={["superadmin", "admin"]}>
+          <RoleGuard allowedRoles={["superadmin", "admin", "supervisor"]}>
             <AppLayout />
           </RoleGuard>
         }
@@ -43,10 +45,33 @@ function AppRoutes() {
             </RoleGuard>
           }
         />
-        <Route path="/users" element={<UsersPage />} />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route
+          path="/users"
+          element={
+            <RoleGuard allowedRoles={["superadmin", "admin"]}>
+              <UsersPage />
+            </RoleGuard>
+          }
+        />
+        <Route
+          path="/cashiers"
+          element={
+            <RoleGuard allowedRoles={["superadmin", "admin"]}>
+              <CashiersPage />
+            </RoleGuard>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <RoleGuard allowedRoles={["superadmin", "admin"]}>
+              <ProductsPage />
+            </RoleGuard>
+          }
+        />
         <Route path="/sales" element={<SalesPage />} />
         <Route path="/expenses" element={<ExpensesPage />} />
+        <Route path="/reports" element={<ReportsPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

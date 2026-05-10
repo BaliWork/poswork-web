@@ -12,6 +12,8 @@
 - [x] Create `src/components/layout/Sidebar.tsx` — navigation sidebar (role-aware menu items)
 - [x] Create `src/components/layout/Header.tsx` — top header bar with user info and logout
 - [x] Sidebar hides "Merchants" link for Admin Merchant role
+- [ ] Sidebar hides "Merchants", "Users", "Cashiers", and "Products" links for the Supervisor role
+- [ ] Sidebar shows "Cashiers" link for Admin only (not Supervisor)
 - [x] Layout is responsive (collapsible sidebar on mobile)
 - [x] Sidebar is fixed/sticky — does not scroll with main content
 
@@ -62,13 +64,21 @@
 
 ## 5.5 Users Page (`/users`)
 
+> This page manages Firebase Auth users: **Admin** and **Supervisor**. Cashiers are managed on the separate Cashiers page.
+>
+> **Admin Merchant constraint:** Admin Merchant can create **at most 1 supervisor** for their merchant. The form must check for an existing supervisor before allowing a new one to be created. Admin Merchant cannot create other admin accounts.
+
 ### Checklist
 
 - [x] Create `src/components/users/UserTable.tsx` — user list table
 - [x] Create `src/components/users/UserForm.tsx` — add/edit user form (dialog)
 - [x] Create `src/components/users/UserDeleteDialog.tsx` — delete confirmation
-- [x] **Superadmin**: view & manage all users across all merchants
-- [x] **Admin Merchant**: view & manage cashier users within own merchant only
+- [x] **Superadmin**: view & manage all users (admin + supervisor) across all merchants
+- [x] **Admin Merchant**: view & manage supervisor users within own merchant only
+- [ ] Update filter: Admin Merchant only sees users with `role === 'supervisor'` within their own merchant
+- [ ] Remove cashier display from the Users page — cashiers are moved to the Cashiers page
+- [ ] Enforce 1-supervisor limit: if merchant already has a supervisor, hide "Add" button or show an error for Admin Merchant role
+- [ ] Restrict role selector in UserForm: Admin Merchant can only assign `supervisor` role (not `admin`)
 - [x] Add user with role assignment
 - [x] Edit user details
 - [x] Delete user with confirmation
@@ -78,7 +88,34 @@
 
 ---
 
+## 5.5b Cashiers Page (`/cashiers`) — *New Page*
+
+> Dedicated page for managing cashiers stored in `merchants/{merchantId}/cashiers/{pinCode}`. Cashiers do not use Firebase Auth — they authenticate via a 4-digit PIN in the mobile app. **Accessible by Superadmin and Admin Merchant only. Supervisor cannot access this page.**
+
+### Checklist
+
+- [ ] Create `src/components/cashiers/CashierTable.tsx` — cashier list table (name, PIN, created date)
+- [ ] Create `src/components/cashiers/CashierForm.tsx` — add/edit cashier form (dialog)
+  - [ ] Field: `name` (text)
+  - [ ] Field: `pin` (4-digit numeric, numbers only, min/max 4 digits)
+  - [ ] Validation: PIN must not already be used by another cashier in the same merchant
+  - [ ] Edit: only `name` can be changed — PIN is the document ID and cannot be changed (must delete + recreate)
+- [ ] Create `src/components/cashiers/CashierDeleteDialog.tsx` — delete confirmation
+- [ ] Create `src/hooks/useCashiers.ts` — real-time listener from `merchants/{merchantId}/cashiers`
+- [ ] Create `src/pages/CashiersPage.tsx`
+- [ ] **Superadmin**: view & manage cashiers across all merchants (with merchant filter/selector)
+- [ ] **Admin Merchant**: view & manage cashiers within own merchant only
+- [ ] **Supervisor**: no access — route is blocked
+- [ ] Add new cashier (enter unique PIN)
+- [ ] Delete cashier with confirmation dialog
+- [ ] Loading skeletons and empty state
+- [ ] Data-table pattern with search and pagination
+
+---
+
 ## 5.6 Products Page (`/products`)
+
+> Accessible by Superadmin and Admin Merchant only. Supervisor cannot access this page.
 
 ### Checklist
 
@@ -87,6 +124,7 @@
 - [x] Create `src/components/products/ProductDeleteDialog.tsx` — delete confirmation
 - [x] **Superadmin**: all products with merchant filter/selector
 - [x] **Admin Merchant**: own merchant's products only
+- [ ] Remove Supervisor access — Supervisor does not manage products
 - [x] Add product via modal dialog form
 - [x] Edit existing product
 - [x] Delete product with confirmation dialog
@@ -98,6 +136,8 @@
 
 ## 5.7 Sales Page (`/sales`)
 
+> Supervisor has read-only access to this page — all Add/Edit/Delete actions must be hidden for the Supervisor role.
+
 ### Checklist
 
 - [x] Create `src/components/sales/SalesSummaryCards.tsx` — KPI cards
@@ -108,6 +148,7 @@
 - [x] Detailed sales transaction table
 - [x] **Superadmin**: all merchants with merchant filter
 - [x] **Admin Merchant**: own merchant's data only
+- [ ] **Supervisor**: own merchant's data only (read-only — no add/edit/delete actions)
 - [x] Date range filtering
 - [x] Loading skeletons and empty state
 - [x] Upgrade to `@tanstack/react-table` data-table pattern (search filter, sorting, pagination)
@@ -161,7 +202,9 @@
 - [x] All pages render without errors
 - [x] Navigation between pages works correctly
 - [x] Role-based content scoping verified for both Superadmin and Admin
+- [ ] Role-based content scoping verified for Supervisor
 - [x] CRUD operations work for Merchants, Users, and Products
+- [ ] CRUD operations work for Cashiers (PIN-based, in merchant subcollection)
 - [x] Sales data displays correctly with charts and tables
 - [x] Responsive layout works on mobile and desktop
 - [x] All component files follow PascalCase naming

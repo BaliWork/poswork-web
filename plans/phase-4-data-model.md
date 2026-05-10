@@ -6,24 +6,50 @@
 
 ## Collection: `users`
 
+Only stores users with Firebase Auth accounts: **Superadmin**, **Admin Merchant**, and **Supervisor**. Cashiers are **not** stored here.
+
 ```json
 // Superadmin
-{ "name": "...", "email": "...", "role": "superadmin" }
+{ "name": "Superadmin", "email": "superadmin@gmail.com", "role": "superadmin" }
 
 // Admin Merchant
-{ "name": "...", "email": "...", "role": "admin", "merchant": "merchant-id" }
+{ "name": "Admin", "email": "admin@merchant.com", "role": "admin", "merchant": "blayag-dek-ani" }
 
-// Cashier (mobile only)
-{ "name": "...", "email": "...", "role": "cashier", "merchant": "merchant-id" }
+// Supervisor
+{ "name": "Supervisor 1", "email": "supervisor@merchant.com", "role": "supervisor", "merchant": "blayag-dek-ani" }
 ```
 
-> The `merchant` field references the document ID in the `merchants` collection. Superadmin does not have a `merchant` field.
+> The `merchant` field contains the document ID from the `merchants` collection. Superadmin has no `merchant` field. Cashiers are **not stored here** — see the `cashiers` subcollection below.
+
+## Subcollection: `merchants/{merchantId}/cashiers/{pinCode}`
+
+Cashiers are stored directly inside the `cashiers` subcollection of a merchant document. The document ID is the 4-digit PIN (string, e.g., `"1234"`).
+
+```json
+{
+  "name": "Kasir Utama",
+  "createdAt": "2026-05-10",
+  "updatedAt": null
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `name` | `string` | Cashier name displayed in the mobile app |
+| `createdAt` | `string` | Date created (`YYYY-MM-DD`) |
+| `updatedAt` | `string \| null` | Date last updated; `null` if never updated |
+
+> **PIN as Document ID:** The 4-digit PIN is used as the document ID. Uniqueness is enforced automatically by Firestore (no two documents can share the same PIN within one merchant). PINs are only unique per merchant — different merchants may use the same PIN.
+
+> **Security:** PINs are not encrypted in Firestore, but access to the `cashiers` subcollection is protected by Firebase Security Rules — only Superadmin, Admin, and Supervisor of that merchant can read or write cashier data.
 
 ## Collection: `merchants/{merchantId}`
 
 ```json
 { "name": "Merchant Name" }
 ```
+
+> Merchant stores only the name. Products, sales, expenses, and cashiers are stored in their respective subcollections.
 
 ## Subcollection: `merchants/{merchantId}/products/{productId}`
 
@@ -38,8 +64,8 @@
 
 ## Subcollection: `merchants/{merchantId}/sales/{date}`
 
-- Document ID adalah string tanggal: `2026-04-18`
-- Setiap dokumen berisi `opening_balance`, `closing_balance` (opsional), dan `orders`
+- Document ID is a date string: `2026-04-18`
+- Each document contains `opening_balance`, `closing_balance` (optional), and `orders`
 
 ```json
 {
@@ -96,7 +122,9 @@
 ### TypeScript Interfaces
 
 - [x] Define `User` interface (`name`, `email`, `role`, `merchant?`)
+- [ ] Update `User` interface: `role: 'superadmin' | 'admin' | 'supervisor'` (remove `'cashier'`)
 - [x] Define `Merchant` interface (`name`)
+- [ ] Define `Cashier` interface (`name`, `createdAt`, `updatedAt: string | null`) + `id` (pin code)
 - [x] Define `Product` interface (`name`, `category`, `price`, `prices`)
 - [x] Define `Sale` interface (based on sales document structure)
 - [x] Export all interfaces from their respective files
@@ -106,8 +134,10 @@
 - [x] Create initial test data in Firestore Console:
   - [x] At least 1 superadmin user document
   - [x] At least 1 admin merchant user document
-  - [x] At least 1 cashier user document
+  - [ ] At least 1 supervisor user document
+  - [ ] **Remove** any cashier from the `users` collection — migrate them to the `cashiers` subcollection
   - [x] At least 1 merchant document
+  - [ ] At least 2 cashier documents in `merchants/{merchantId}/cashiers/{pinCode}`
   - [x] At least 2 product documents under a merchant
   - [x] At least 1 sales date document under a merchant
 - [x] Verify user documents match `auth.uid` as document ID
@@ -118,6 +148,7 @@
 - [x] Create `src/hooks/useProducts.ts` — fetch products scoped by merchant with `onSnapshot`
 - [x] Create `src/hooks/useSales.ts` — fetch sales scoped by merchant with `onSnapshot`
 - [x] Create `src/hooks/useUsers.ts` — fetch users (scoped by role/merchant) with `onSnapshot`
+- [ ] Create `src/hooks/useCashiers.ts` — fetch cashiers from `merchants/{merchantId}/cashiers` with `onSnapshot`
 - [x] Each hook returns `{ data, loading, error }`
 - [x] Each hook cleans up `onSnapshot` listener on unmount
 

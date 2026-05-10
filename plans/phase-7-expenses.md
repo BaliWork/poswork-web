@@ -105,7 +105,7 @@ src/
 ## Components
 
 ### `ExpenseTable.tsx`
-- Columns: Tanggal, Deskripsi, Kategori, Jumlah, Catatan, Aksi
+- Columns: Date, Description, Category, Amount, Note, Actions
 - Filter: by month/year (date range picker or month selector)
 - Filter: by category (Select dropdown)
 - Actions: Edit (pencil icon), Delete (trash icon)
@@ -113,7 +113,7 @@ src/
 
 ### `ExpenseForm.tsx`
 - Triggered via Dialog (Add / Edit mode)
-- Fields: Deskripsi (Input), Kategori (Select), Jumlah (Input number), Tanggal (Input date), Catatan (Textarea, optional)
+- Fields: Description (Input), Category (Select), Amount (Input number), Date (Input date), Note (Textarea, optional)
 - Validation: all required fields except `note`
 - On submit: `addDoc` or `updateDoc` to Firestore
 
@@ -127,7 +127,7 @@ src/
 ## Page: `ExpensesPage.tsx`
 
 - **Route:** `/expenses`
-- **Accessible by:** Superadmin (all merchants), Admin Merchant (own merchant)
+- **Accessible by:** Superadmin (all merchants), Admin Merchant (own merchant), Supervisor (own merchant)
 - Header with "Tambah Pengeluaran" button
 - For Superadmin: merchant selector dropdown to switch between merchants
 - Month/year filter to narrow down expense entries
@@ -142,7 +142,7 @@ Add to `App.tsx`:
 
 ```tsx
 <Route path="/expenses" element={
-  <RoleGuard allowedRoles={['superadmin', 'admin']}>
+  <RoleGuard allowedRoles={['superadmin', 'admin', 'supervisor']}>
     <ExpensesPage />
   </RoleGuard>
 } />
@@ -156,19 +156,19 @@ Add "Pengeluaran" menu item to `Sidebar.tsx`:
 - Icon: `TrendingDown` (lucide-react)
 - Label: Pengeluaran
 - Path: `/expenses`
-- Visible to: `superadmin`, `admin`
+- Visible to: `superadmin`, `admin`, `supervisor`
 
 ---
 
 ## Firebase Security Rules Update
 
-Add to the `merchants/{merchantId}` match block:
+Already covered in the updated Phase 6 rules (using the `isMemberOfMerchant` helper which includes both admin and supervisor):
 
 ```
 // expenses subcollection
 match /expenses/{expenseId} {
   allow read, write: if isSuperadmin();
-  allow read, write: if isAdminOfMerchant(merchantId);
+  allow read, write: if isMemberOfMerchant(merchantId); // admin + supervisor
 }
 ```
 
@@ -176,15 +176,16 @@ match /expenses/{expenseId} {
 
 ## Acceptance Criteria
 
-- [ ] Admin Merchant can add, edit, delete expenses scoped to their own merchant
+- [ ] Admin Merchant can add, edit, and delete expenses for their own merchant
+- [ ] Supervisor can add, edit, and delete expenses for their own merchant
 - [ ] Superadmin can view and manage expenses across all merchants
 - [ ] Expenses are filterable by month and category
-- [ ] Total pengeluaran for the selected filter period is shown
-- [ ] Amount is stored and displayed as rupiah integer (no decimals)
+- [ ] Total expenses for the selected period are displayed
+- [ ] Amount is stored and displayed as an integer in rupiah (no decimals)
 - [ ] Real-time updates via `onSnapshot`
 - [ ] Form validates all required fields before submitting
 - [ ] Delete requires confirmation via dialog
 
 ---
 
-*Phase 7 — Expenses (Pengeluaran) Feature*
+*Phase 7 — Expenses Feature*

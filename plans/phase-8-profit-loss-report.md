@@ -1,6 +1,6 @@
-# Phase 8 — Profit & Loss Report (Laporan Laba Rugi)
+# Phase 8 — Profit & Loss Report
 
-> **Goal:** Implement a Profit & Loss (Laba Rugi) report page that calculates net profit by combining total revenue from sales transactions and total expenses (pengeluaran) for a selected period, per merchant.
+> **Goal:** Implement a Profit & Loss report page that calculates net profit by combining total revenue from sales transactions and total expenses for a selected period, per merchant.
 
 ---
 
@@ -8,9 +8,9 @@
 
 The Profit & Loss report gives merchants a clear view of their financial performance by comparing:
 
-- **Pemasukan (Revenue):** Total sales revenue from the `merchants/{merchantId}/sales` subcollection
-- **Pengeluaran (Expenses):** Total expenses from the `merchants/{merchantId}/expenses` subcollection
-- **Laba / Rugi (Net Profit / Loss):** Revenue minus Expenses
+- **Revenue:** Total sales revenue from the `merchants/{merchantId}/sales` subcollection
+- **Expenses:** Total expenses from the `merchants/{merchantId}/expenses` subcollection
+- **Net Profit / Loss:** Revenue minus Expenses
 
 The report is filterable by month and year, and supports merchant-scoped access control.
 
@@ -19,11 +19,11 @@ The report is filterable by month and year, and supports merchant-scoped access 
 ## Financial Formula
 
 ```
-Laba Bersih = Total Pemasukan - Total Pengeluaran
+Net Profit = Total Revenue - Total Expenses
 
-Total Pemasukan = Sum of all sales transaction totals in the period
-Total Pengeluaran = Sum of all expense amounts in the period
-Laba / Rugi = Positive (laba) or Negative (rugi)
+Total Revenue = Sum of all sales transaction totals in the period
+Total Expenses = Sum of all expense amounts in the period
+Net Profit / Loss = Positive (profit) or Negative (loss)
 ```
 
 ---
@@ -46,8 +46,8 @@ Add to `src/types/index.ts`:
 ```ts
 export interface ProfitLossSummary {
   period: string;          // e.g., "April 2026"
-  totalRevenue: number;    // Total pemasukan (rupiah)
-  totalExpenses: number;   // Total pengeluaran (rupiah)
+  totalRevenue: number;    // Total revenue (rupiah)
+  totalExpenses: number;   // Total expenses (rupiah)
   netProfit: number;       // totalRevenue - totalExpenses (can be negative)
   isProfit: boolean;       // netProfit >= 0
 }
@@ -68,7 +68,7 @@ export interface MonthlyBreakdown {
 src/
 ├── components/
 │   └── reports/
-│       ├── ProfitLossSummaryCards.tsx   # KPI cards: Pemasukan, Pengeluaran, Laba/Rugi
+│       ├── ProfitLossSummaryCards.tsx   # KPI cards: Revenue, Expenses, Net Profit/Loss
 │       ├── ProfitLossChart.tsx          # Bar/line chart comparing revenue vs expenses
 │       └── ProfitLossTable.tsx          # Monthly breakdown table
 ├── hooks/
@@ -108,30 +108,30 @@ Three summary cards for the selected period:
 
 | Card | Value | Color |
 |---|---|---|
-| Total Pemasukan | Sum of all revenue | Green |
-| Total Pengeluaran | Sum of all expenses | Red |
-| Laba / Rugi Bersih | Revenue - Expenses | Green (profit) / Red (loss) |
+| Total Revenue | Sum of all revenue | Green |
+| Total Expenses | Sum of all expenses | Red |
+| Net Profit / Loss | Revenue - Expenses | Green (profit) / Red (loss) |
 
 ### `ProfitLossChart.tsx`
 
 - Grouped bar chart (Recharts `BarChart`) or combo line+bar chart
 - X-axis: Months (Jan–Dec)
-- Bars: Pemasukan (green) vs Pengeluaran (red)
-- Line overlay (optional): Laba/Rugi Bersih
+- Bars: Revenue (green) vs Expenses (red)
+- Line overlay (optional): Net Profit / Loss
 - Tooltip showing values in rupiah format
 
 ### `ProfitLossTable.tsx`
 
 Monthly breakdown table:
 
-| Bulan | Pemasukan | Pengeluaran | Laba / Rugi |
+| Month | Revenue | Expenses | Net Profit / Loss |
 |---|---|---|---|
-| Januari | Rp 2.500.000 | Rp 800.000 | Rp 1.700.000 |
-| Februari | Rp 1.900.000 | Rp 1.200.000 | Rp 700.000 |
+| January | Rp 2.500.000 | Rp 800.000 | Rp 1.700.000 |
+| February | Rp 1.900.000 | Rp 1.200.000 | Rp 700.000 |
 | ... | | | |
 | **Total** | **Rp X** | **Rp X** | **Rp X** |
 
-- Laba/Rugi column: green text for positive, red text for negative
+- Net Profit / Loss column: green text for positive, red text for negative
 - Bold total row at the bottom
 
 ---
@@ -139,7 +139,7 @@ Monthly breakdown table:
 ## Page: `ReportsPage.tsx`
 
 - **Route:** `/reports`
-- **Accessible by:** Superadmin (all merchants), Admin Merchant (own merchant)
+- **Accessible by:** Superadmin (all merchants), Admin Merchant (own merchant), Supervisor (own merchant)
 - Year selector (dropdown or input, defaults to current year)
 - For Superadmin: merchant selector dropdown
 - `ProfitLossSummaryCards` at the top
@@ -155,7 +155,7 @@ Add to `App.tsx`:
 
 ```tsx
 <Route path="/reports" element={
-  <RoleGuard allowedRoles={['superadmin', 'admin']}>
+  <RoleGuard allowedRoles={['superadmin', 'admin', 'supervisor']}>
     <ReportsPage />
   </RoleGuard>
 } />
@@ -165,11 +165,11 @@ Add to `App.tsx`:
 
 ## Sidebar Navigation
 
-Add "Laporan" menu item to `Sidebar.tsx`:
+Add "Reports" menu item to `Sidebar.tsx`:
 - Icon: `FileBarChart` (lucide-react)
-- Label: Laporan Laba Rugi
+- Label: Profit & Loss Report
 - Path: `/reports`
-- Visible to: `superadmin`, `admin`
+- Visible to: `superadmin`, `admin`, `supervisor`
 
 ---
 
@@ -194,10 +194,11 @@ No new rules required — this page reads from existing `sales` and `expenses` s
 - [ ] Monthly breakdown chart compares revenue vs expenses per month
 - [ ] Monthly breakdown table lists all 12 months with totals
 - [ ] Net profit/loss is calculated correctly as `revenue - expenses`
-- [ ] Negative profit (rugi) is visually distinct (red color)
+- [ ] Negative profit (loss) is visually distinct (red color)
 - [ ] Year selector filters data for the chosen year
 - [ ] Superadmin can switch between merchants
 - [ ] Admin Merchant sees data scoped to their own merchant
+- [ ] Supervisor sees data scoped to their own merchant
 - [ ] Loading state is handled with skeleton components
 - [ ] Currency values are formatted as Rupiah (integer, no decimals)
 

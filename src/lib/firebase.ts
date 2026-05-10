@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { initializeFirestore } from "firebase/firestore";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
+import { initializeFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,6 +17,17 @@ export const auth = getAuth(app);
 export const db = initializeFirestore(app, {
   experimentalForceLongPolling: true,
 });
+
+if (import.meta.env.VITE_USE_FIREBASE_EMULATOR === "true") {
+  connectAuthEmulator(auth, import.meta.env.VITE_FIREBASE_AUTH_EMULATOR_HOST, {
+    disableWarnings: true,
+  });
+  connectFirestoreEmulator(
+    db,
+    import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_HOST,
+    Number(import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT)
+  );
+}
 
 // Secondary app instance khusus untuk membuat Auth user baru
 // tanpa mengganggu sesi login admin yang sedang aktif.

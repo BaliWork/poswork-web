@@ -7,6 +7,8 @@ import {
   Package,
   BarChart3,
   TrendingDown,
+  FileBarChart,
+  CreditCard,
   LogOut,
   X,
   ChevronsUpDown,
@@ -29,12 +31,14 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard, roles: ["superadmin", "admin"] },
+  { to: "/", label: "Dashboard", icon: LayoutDashboard, roles: ["superadmin", "admin", "supervisor"] },
   { to: "/merchants", label: "Merchants", icon: Store, roles: ["superadmin"] },
   { to: "/users", label: "Users", icon: Users, roles: ["superadmin", "admin"] },
+  { to: "/cashiers", label: "Kasir", icon: CreditCard, roles: ["superadmin", "admin"] },
   { to: "/products", label: "Produk", icon: Package, roles: ["superadmin", "admin"] },
-  { to: "/sales", label: "Penjualan", icon: BarChart3, roles: ["superadmin", "admin"] },
-  { to: "/expenses", label: "Pengeluaran", icon: TrendingDown, roles: ["superadmin", "admin"] },
+  { to: "/sales", label: "Penjualan", icon: BarChart3, roles: ["superadmin", "admin", "supervisor"] },
+  { to: "/expenses", label: "Pengeluaran", icon: TrendingDown, roles: ["superadmin", "admin", "supervisor"] },
+  { to: "/reports", label: "Laporan", icon: FileBarChart, roles: ["superadmin", "admin", "supervisor"] },
 ];
 
 export default function Sidebar({ open, onClose }: SidebarProps) {

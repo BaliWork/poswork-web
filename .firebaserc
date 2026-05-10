@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "poswork-dev"
-  }
+    "default": "poswork-dev",
+    "development": "poswork-dev"
+  },
+  "targets": {},
+  "etags": {}
 }

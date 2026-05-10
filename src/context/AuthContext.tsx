@@ -8,7 +8,7 @@ import {
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 
-type UserRole = "superadmin" | "admin" | "cashier";
+type UserRole = "superadmin" | "admin" | "supervisor";
 
 interface UserData {
   uid: string;
@@ -52,10 +52,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
           const userDoc = await getDoc(doc(db, "users", firebaseUser.uid));
           if (userDoc.exists()) {
             const data = userDoc.data();
-            if (data.role === "cashier") {
+            const validRoles: UserRole[] = ["superadmin", "admin", "supervisor"];
+            if (!validRoles.includes(data.role as UserRole)) {
               await signOut(auth);
               setUser(null);
-              setError("Akun kasir tidak dapat mengakses aplikasi web ini.");
+              setError("Akun Anda tidak memiliki akses ke aplikasi web ini.");
               setLoading(false);
               return;
             }

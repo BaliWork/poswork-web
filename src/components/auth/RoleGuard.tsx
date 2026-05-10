@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 
-type UserRole = "superadmin" | "admin";
+type UserRole = "superadmin" | "admin" | "supervisor";
 
 interface RoleGuardProps {
   allowedRoles: UserRole[];

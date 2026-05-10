@@ -7,7 +7,18 @@
 
 ## Project Overview
 
-A centralized web application for managing merchants, products, users, and sales data. The system supports 3 roles with different access levels, built on Firebase as the backend and React as the frontend.
+A centralized web application for managing merchants, products, users, and sales data. The system supports 4 roles with different access levels, built on Firebase as the backend and React as the frontend.
+
+### Role Hierarchy
+
+```
+Superadmin
+  └── Admin Merchant
+        └── Supervisor
+              └── Cashier (mobile only, PIN-based)
+```
+
+> **Important:** Cashiers are **not stored** in the `users` collection. They are stored as documents in the `cashiers` subcollection inside each merchant document (`merchants/{merchantId}/cashiers/{pinCode}`). Cashier authentication is done via a 4-digit PIN in the mobile POS app — not Firebase Auth.
 
 ---
 
@@ -30,17 +41,29 @@ A centralized web application for managing merchants, products, users, and sales
 
 ## Role Access Summary
 
-| Feature | Superadmin | Admin Merchant | Cashier |
-|---|:---:|:---:|:---:|
-| Web Login | ✅ | ✅ | ❌ |
-| Dashboard | ✅ | ✅ | — |
-| Manage Merchants | ✅ | ❌ | — |
-| Manage All Users | ✅ | ❌ | — |
-| Manage Cashier Users | ✅ | ✅ (own) | — |
-| Manage Products | ✅ (all) | ✅ (own) | — |
-| View Sales Data | ✅ (all) | ✅ (own) | — |
-| Manage Expenses | ✅ (all) | ✅ (own) | — |
-| View Profit & Loss Report | ✅ (all) | ✅ (own) | — |
+| Feature | Superadmin | Admin Merchant | Supervisor | Cashier |
+|---|:---:|:---:|:---:|:---:|
+| Web Login | ✅ | ✅ | ✅ | ❌ |
+| Dashboard | ✅ | ✅ | ✅ | — |
+| Manage Merchants | ✅ | ❌ | ❌ | — |
+| Manage Users (Admin/Supervisor) | ✅ | ❌ | ❌ | — |
+| Manage Supervisor Users | ✅ | ✅ (own, max 1) | ❌ | — |
+| Manage Cashiers (PIN-based) | ✅ | ✅ (own) | ❌ | — |
+| Manage Products | ✅ (all) | ✅ (own) | ❌ | — |
+| View Sales Data | ✅ (all) | ✅ (own) | ✅ (own, read-only) | — |
+| Manage Expenses | ✅ (all) | ✅ (own) | ✅ (own) | — |
+| View Profit & Loss Report | ✅ (all) | ✅ (own) | ✅ (own) | — |
+
+> **Admin Merchant constraint:** Admin Merchant can only add **1 supervisor** per merchant and any number of cashiers. Admin Merchant cannot create other admin accounts — only Superadmin can create admin users.
+
+### Role Details
+
+| Role | Storage | Authentication | Notes |
+|---|---|---|---|
+| **Superadmin** | `users/{uid}` | Firebase Auth (email/password) | No `merchant` field |
+| **Admin Merchant** | `users/{uid}` | Firebase Auth (email/password) | Has `merchant` field |
+| **Supervisor** | `users/{uid}` | Firebase Auth (email/password) | Has `merchant` field |
+| **Cashier** | `merchants/{merchantId}/cashiers/{pinCode}` | 4-digit PIN (mobile only) | **Does not use Firebase Auth** |
 
 ---
 
