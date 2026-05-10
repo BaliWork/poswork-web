@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:seed": "vitest run --reporter=verbose src/tests/seed-firestore.test.ts",
-    "test:verify": "vitest run --reporter=verbose src/tests/verify-auth-uid.test.ts"
+    "test:verify": "vitest run --reporter=verbose src/tests/verify-auth-uid.test.ts",
+    "backup": "GOOGLE_APPLICATION_CREDENTIALS=secrets/production-service-account.json npx tsx scripts/backup-production.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.0",
