@@ -176,15 +176,15 @@ match /expenses/{expenseId} {
 
 ## Acceptance Criteria
 
-- [ ] Admin Merchant can add, edit, and delete expenses for their own merchant
-- [ ] Supervisor can add, edit, and delete expenses for their own merchant
-- [ ] Superadmin can view and manage expenses across all merchants
-- [ ] Expenses are filterable by month and category
-- [ ] Total expenses for the selected period are displayed
-- [ ] Amount is stored and displayed as an integer in rupiah (no decimals)
-- [ ] Real-time updates via `onSnapshot`
-- [ ] Form validates all required fields before submitting
-- [ ] Delete requires confirmation via dialog
+- [x] Admin Merchant can add, edit, and delete expenses for their own merchant
+- [x] Supervisor can add, edit, and delete expenses for their own merchant
+- [x] Superadmin can view and manage expenses across all merchants
+- [x] Expenses are filterable by month and category
+- [x] Total expenses for the selected period are displayed
+- [x] Amount is stored and displayed as an integer in rupiah (no decimals)
+- [x] Real-time updates via `onSnapshot`
+- [x] Form validates all required fields before submitting
+- [x] Delete requires confirmation via dialog
 
 ---
 
