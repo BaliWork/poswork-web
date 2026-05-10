@@ -86,3 +86,12 @@ export interface Expense {
 }
 
 export type ExpenseFormValues = Omit<Expense, "id" | "createdAt">;
+
+export interface Cashier {
+  id: string; // PIN code (4-digit string), used as Firestore document ID
+  name: string;
+  createdAt: string; // ISO date string, e.g. "2026-05-10"
+  updatedAt: string | null;
+}
+
+export type CashierFormValues = Omit<Cashier, "id" | "createdAt" | "updatedAt">;

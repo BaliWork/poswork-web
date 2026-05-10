@@ -27,7 +27,7 @@ export function useUsers() {
         : query(
             usersRef,
             where("merchant", "==", currentUser.merchant),
-            where("role", "==", "cashier")
+            where("role", "==", "supervisor")
           );
 
     const unsubscribe = onSnapshot(

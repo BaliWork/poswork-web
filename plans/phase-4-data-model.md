@@ -122,9 +122,9 @@ Cashiers are stored directly inside the `cashiers` subcollection of a merchant d
 ### TypeScript Interfaces
 
 - [x] Define `User` interface (`name`, `email`, `role`, `merchant?`)
-- [ ] Update `User` interface: `role: 'superadmin' | 'admin' | 'supervisor'` (remove `'cashier'`)
+- [x] Update `User` interface: `role: 'superadmin' | 'admin' | 'supervisor'` (remove `'cashier'`)
 - [x] Define `Merchant` interface (`name`)
-- [ ] Define `Cashier` interface (`name`, `createdAt`, `updatedAt: string | null`) + `id` (pin code)
+- [x] Define `Cashier` interface (`name`, `createdAt`, `updatedAt: string | null`) + `id` (pin code)
 - [x] Define `Product` interface (`name`, `category`, `price`, `prices`)
 - [x] Define `Sale` interface (based on sales document structure)
 - [x] Export all interfaces from their respective files
@@ -134,10 +134,10 @@ Cashiers are stored directly inside the `cashiers` subcollection of a merchant d
 - [x] Create initial test data in Firestore Console:
   - [x] At least 1 superadmin user document
   - [x] At least 1 admin merchant user document
-  - [ ] At least 1 supervisor user document
-  - [ ] **Remove** any cashier from the `users` collection — migrate them to the `cashiers` subcollection
+  - [x] At least 1 supervisor user document
+  - [x] **Remove** any cashier from the `users` collection — migrate them to the `cashiers` subcollection
   - [x] At least 1 merchant document
-  - [ ] At least 2 cashier documents in `merchants/{merchantId}/cashiers/{pinCode}`
+  - [x] At least 2 cashier documents in `merchants/{merchantId}/cashiers/{pinCode}`
   - [x] At least 2 product documents under a merchant
   - [x] At least 1 sales date document under a merchant
 - [x] Verify user documents match `auth.uid` as document ID
@@ -148,7 +148,7 @@ Cashiers are stored directly inside the `cashiers` subcollection of a merchant d
 - [x] Create `src/hooks/useProducts.ts` — fetch products scoped by merchant with `onSnapshot`
 - [x] Create `src/hooks/useSales.ts` — fetch sales scoped by merchant with `onSnapshot`
 - [x] Create `src/hooks/useUsers.ts` — fetch users (scoped by role/merchant) with `onSnapshot`
-- [ ] Create `src/hooks/useCashiers.ts` — fetch cashiers from `merchants/{merchantId}/cashiers` with `onSnapshot`
+- [x] Create `src/hooks/useCashiers.ts` — fetch cashiers from `merchants/{merchantId}/cashiers` with `onSnapshot`
 - [x] Each hook returns `{ data, loading, error }`
 - [x] Each hook cleans up `onSnapshot` listener on unmount
 
