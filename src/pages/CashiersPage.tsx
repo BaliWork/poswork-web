@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { doc, setDoc, updateDoc, deleteDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { useCashiers } from "@/hooks/useCashiers";
@@ -35,11 +35,6 @@ export default function CashiersPage() {
 
   function handleAdd() {
     setEditCashier(null);
-    setFormOpen(true);
-  }
-
-  function handleEdit(cashier: Cashier) {
-    setEditCashier(cashier);
     setFormOpen(true);
   }
 

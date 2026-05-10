@@ -80,7 +80,7 @@ export default function ProfitLossChart({ data, loading }: ProfitLossChartProps)
                 }
               />
               <Tooltip
-                formatter={(value: number, name: string) => [formatRupiah(value), name]}
+                formatter={(value, name) => [formatRupiah(value as number), name as string]}
                 contentStyle={{
                   backgroundColor: "hsl(var(--popover))",
                   borderColor: "hsl(var(--border))",

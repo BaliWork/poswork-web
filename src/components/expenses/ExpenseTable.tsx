@@ -221,7 +221,7 @@ export default function ExpenseTable({
     <div className="space-y-3">
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-2">
-        <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+        <Select value={selectedMonth} onValueChange={(v) => { if (v !== null) setSelectedMonth(v); }}>
           <SelectTrigger className="w-[160px]">
             <SelectValue placeholder="Semua Bulan" />
           </SelectTrigger>
@@ -235,7 +235,7 @@ export default function ExpenseTable({
           </SelectContent>
         </Select>
 
-        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+        <Select value={selectedCategory} onValueChange={(v) => { if (v !== null) setSelectedCategory(v); }}>
           <SelectTrigger className="w-[200px]">
             <SelectValue placeholder="Semua Kategori" />
           </SelectTrigger>

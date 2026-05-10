@@ -14,12 +14,12 @@ Mendeploy semua perubahan dari environment **development** ke **production** sec
 
 Sebelum memulai, pastikan hal-hal berikut sudah terpenuhi:
 
-- [ ] Firebase CLI sudah terinstall: `npm install -g firebase-tools`
-- [ ] Sudah login ke Firebase CLI: `firebase login`
-- [ ] File `.env.production` sudah terisi dengan konfigurasi Firebase project production
-- [ ] Akses ke Firebase Console untuk project production
-- [ ] `firebase-admin` SDK credentials tersedia (service account JSON) untuk proses backup
-- [ ] `node` versi 18+ terinstall
+- [x] Firebase CLI sudah terinstall: `npm install -g firebase-tools`
+- [x] Sudah login ke Firebase CLI: `firebase login`
+- [x] File `.env.production` sudah terisi dengan konfigurasi Firebase project production
+- [x] Akses ke Firebase Console untuk project production
+- [x] `firebase-admin` SDK credentials tersedia (service account JSON) untuk proses backup
+- [x] `node` versi 18+ terinstall
 - [ ] Akun Vercel sudah ada dan repository (GitHub/GitLab) sudah terhubung ke Vercel
 - [ ] Environment variables production sudah dikonfigurasi di Vercel dashboard
 
@@ -59,12 +59,11 @@ Buat file `scripts/backup-production.ts` yang akan mengekspor seluruh koleksi:
 ### 1.2 Jalankan backup
 
 ```bash
-# Pastikan GOOGLE_APPLICATION_CREDENTIALS sudah diset ke service account production
-export GOOGLE_APPLICATION_CREDENTIALS="path/to/production-service-account.json"
-
-# Jalankan script backup
-npx tsx scripts/backup-production.ts
+# Cukup jalankan (path service account sudah dikonfigurasi di package.json)
+npm run backup
 ```
+
+> ✅ **Done** — `backups/production-backup-2026-05-10/` berhasil dibuat.
 
 ### 1.3 Output backup
 
@@ -105,11 +104,11 @@ gcloud firestore export gs://YOUR_BUCKET/backups/YYYY-MM-DD \
 
 ### Checklist Verifikasi
 
-- [ ] File `users.json` ada dan berisi data user production
-- [ ] File `merchants.json` ada dan berisi semua merchant
-- [ ] Subcollection `products`, `sales`, `cashiers`, `expenses` masing-masing ada dan tidak kosong (jika memang ada data)
-- [ ] File `backup-manifest.json` mencantumkan jumlah dokumen yang dieksport
-- [ ] Bandingkan jumlah dokumen di backup dengan yang terlihat di Firebase Console
+- [x] File `users.json` ada dan berisi data user production (2 users)
+- [x] File `merchants.json` ada dan berisi semua merchant (1 merchant: `blayag-dek-ani`)
+- [x] Subcollection `products` (159 docs), `sales` (35 dates / 2.788 orders), `cashiers` (0), `expenses` (0) — semua ada
+- [x] File `backup-manifest.json` mencantumkan jumlah dokumen yang dieksport
+- [x] Bandingkan jumlah dokumen di backup dengan yang terlihat di Firebase Console
 
 ---
 
@@ -152,9 +151,9 @@ Buka `http://localhost:4173` dan verifikasi aplikasi berjalan dengan config prod
 
 ### 3.4 Checklist Build
 
-- [ ] Build berhasil tanpa error TypeScript
-- [ ] Folder `dist/` terbentuk
-- [ ] Tidak ada warning kritis di output build
+- [x] Build berhasil tanpa error TypeScript
+- [x] Folder `dist/` terbentuk (`dist/index.html`, `dist/assets/index.js` 1.3MB, `dist/assets/index.css` 32KB)
+- [x] Tidak ada warning kritis di output build *(hanya chunk size warning, bukan error)*
 - [ ] Preview lokal menampilkan halaman login tanpa error
 
 ---
@@ -171,11 +170,11 @@ firebase deploy --only firestore:indexes
 
 ### 4.2 Pantau status index
 
-- [ ] Buka Firebase Console → Firestore → Indexes
-- [ ] Tunggu semua index berstatus **Enabled** (bukan Building)
-- [ ] Index building bisa memakan waktu beberapa menit hingga beberapa jam tergantung ukuran data
+- [x] Buka Firebase Console → Firestore → Indexes
+- [x] `firestore.indexes.json` kosong — tidak ada compound index → deploy sukses, tidak ada index yang perlu di-build
+- [x] Index building bisa memakan waktu beberapa menit hingga beberapa jam tergantung ukuran data
 
-> **Catatan:** Jika `firestore.indexes.json` saat ini masih kosong (tidak ada compound index), step ini bisa di-skip. Namun tetap jalankan jika ada compound query di kode (misalnya `where` + `orderBy` di koleksi yang sama).
+> ✅ **Done** — `firebase deploy --only firestore:indexes` berhasil di-deploy ke project `poswork`.
 
 ---
 

@@ -74,7 +74,7 @@ export default function CashierTable({ cashiers, loading, onDelete }: CashierTab
     {
       accessorKey: "id",
       header: "PIN",
-      cell: ({ row }) => (
+      cell: () => (
         <span className="font-mono tracking-widest text-muted-foreground">
           ••••
         </span>

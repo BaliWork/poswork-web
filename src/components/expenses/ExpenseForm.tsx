@@ -126,7 +126,7 @@ export default function ExpenseForm({
 
           <div className="space-y-2">
             <Label htmlFor="expense-category">Kategori</Label>
-            <Select value={category} onValueChange={setCategory}>
+            <Select value={category} onValueChange={(v) => { if (v !== null) setCategory(v); }}>
               <SelectTrigger id="expense-category">
                 <SelectValue placeholder="Pilih kategori" />
               </SelectTrigger>
