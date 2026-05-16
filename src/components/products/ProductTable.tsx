@@ -98,7 +98,7 @@ export default function ProductTable({
       header: "Daftar Harga",
       enableSorting: false,
       cell: ({ row }) => {
-        const prices = row.getValue("prices") as number[];
+        const prices = (row.getValue("prices") as number[]) ?? [];
         return (
           <span className="text-xs text-muted-foreground">
             {prices.map(formatRupiah).join(", ")}
