@@ -264,13 +264,13 @@ git push origin main
 
 ### 6.1 Authentication
 
-- [ ] Login sebagai **Superadmin** berhasil
+> ⚠️ **Perlu dilakukan manual** — Silakan login ke https://poswork-web.vercel.app/ dengan akun masing-masing role.
+
+- [ ] Login sebagai **Superadmin** berhasil (`baliwork6@gmail.com`)
 - [ ] Login sebagai **Admin Merchant** berhasil
 - [ ] Login sebagai **Supervisor** berhasil
 - [ ] Login sebagai **Cashier** (role `cashier`) ditolak dengan pesan error yang sesuai
 - [ ] Logout berfungsi
-
-> ⚠️ **Perlu dilakukan manual** — Silakan login ke https://poswork-web.vercel.app/ dengan akun masing-masing role dan centang item di atas.
 
 ### 6.2 Halaman & Navigasi
 
@@ -296,13 +296,17 @@ git push origin main
 
 > ✅ **Backup terbaru:** `backups/production-backup-2026-05-16/` — 202 docs total.
 
-### 6.4 Security Rules (Sementara — Test Mode)
+### 6.4 Security Rules
 
 > **Catatan:** Security Rules production yang ketat akan di-deploy di Phase 10. Untuk saat ini, pastikan rules yang berlaku tidak memblokir akses yang seharusnya diizinkan.
 
-- [ ] Admin Merchant tidak dapat mengakses data merchant lain (basic check)
-- [ ] Request tanpa autentikasi tidak dapat membaca data sensitif
-- [ ] Supervisor hanya bisa baca sales dan expenses
+- [x] Admin Merchant tidak dapat mengakses data merchant lain — diverifikasi via `scripts/verify-auth-firestore.ts` (Admin dengan merchant salah → 403 pada products/sales/expenses blayag-dek-ani ✅)
+- [x] Request tanpa autentikasi tidak dapat membaca data sensitif — semua 5 collection/subcollection mengembalikan `403 PERMISSION_DENIED` ✅
+- [x] Superadmin dapat membaca semua collections — 6/6 read pass ✅
+- [ ] Supervisor hanya bisa baca sales dan expenses (perlu login manual untuk verifikasi)
+
+> ✅ **Automated test 9/9 passed** via `scripts/verify-auth-firestore.ts` (Admin SDK custom token, no password needed)
+> ⚠️ **Bug ditemukan & diperbaiki:** Rules sebelumnya ter-deploy ke `poswork-dev`, bukan production. Sudah di-deploy ulang ke project `poswork` dengan `--project production`.
 
 ### 6.5 Performa
 
