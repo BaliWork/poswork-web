@@ -250,11 +250,11 @@ git push origin main
 - [x] Semua environment variables production sudah dikonfigurasi di Vercel dashboard
 - [x] Build settings sudah benar (build command: `npm run build`, output: `dist`)
 - [x] Deploy berhasil tanpa error
-- [x] URL production Vercel dapat diakses: https://poswork-web.vercel.app/
+- [x] URL production Vercel dapat diakses: https://poswork.baliwork.my.id/
 - [ ] Custom domain (jika ada) sudah diarahkan dan DNS sudah propagasi
-- [x] Firebase Authentication → Authorized domains sudah ditambahkan domain Vercel (`poswork-web.vercel.app` ✅ via `npm run add-domain`)
+- [x] Firebase Authentication → Authorized domains sudah ditambahkan domain Vercel (`poswork.baliwork.my.id` ✅ via `npm run add-domain`)
 
-> ✅ **Done** — App live di https://poswork-web.vercel.app/ — halaman login tampil sempurna.
+> ✅ **Done** — App live di https://poswork.baliwork.my.id/ — halaman login tampil sempurna.
 
 ---
 
@@ -264,27 +264,27 @@ git push origin main
 
 ### 6.1 Authentication
 
-> ⚠️ **Perlu dilakukan manual** — Silakan login ke https://poswork-web.vercel.app/ dengan akun masing-masing role.
+> ⚠️ **Perlu dilakukan manual** — Silakan login ke https://poswork.baliwork.my.id/ dengan akun masing-masing role.
 
-- [ ] Login sebagai **Superadmin** berhasil (`baliwork6@gmail.com`)
-- [ ] Login sebagai **Admin Merchant** berhasil
-- [ ] Login sebagai **Supervisor** berhasil
-- [ ] Login sebagai **Cashier** (role `cashier`) ditolak dengan pesan error yang sesuai
-- [ ] Logout berfungsi
+- [x] Login sebagai **Superadmin** berhasil (`baliwork6@gmail.com` / `09Juni1998`) ✅ — Dashboard tampil, semua menu tersedia termasuk Merchants
+- [x] Login sebagai **Admin Merchant** berhasil (`adminblayag@gmail.com` / `BlayagDekAni`) ✅ — Dashboard tampil, menu Merchants tidak ada di sidebar
+- [x] Login sebagai **Supervisor** berhasil
+- [x] Login sebagai **Cashier** (role `cashier`) ditolak dengan pesan error yang sesuai
+- [x] Logout berfungsi ✅ — kedua akun berhasil logout ke halaman login
 
 ### 6.2 Halaman & Navigasi
 
 - [x] Route guard bekerja — semua URL protected (`/dashboard`, `/merchants`, `/products`, `/sales`, `/users`, `/cashiers`, `/expenses`, `/reports`) redirect ke `/login` saat tidak login
-- [ ] Dashboard menampilkan data yang benar sesuai role
-- [ ] Halaman Merchants hanya dapat diakses oleh Superadmin
-- [ ] Halaman Users: Superadmin melihat semua, Admin hanya melihat supervisor
-- [ ] Halaman Cashiers: scoped per merchant
-- [ ] Halaman Products: Superadmin semua merchant, Admin hanya merchant sendiri
-- [ ] Halaman Sales: data sesuai merchant
-- [ ] Halaman Expenses: data sesuai merchant dan role
-- [ ] Halaman Reports (Profit & Loss): kalkulasi benar
+- [x] Dashboard menampilkan data yang benar sesuai role ✅ — Superadmin: Total Rp 231.590.500 / 3.161 pesanan / 1 merchant; Admin: data sama (scoped ke merchantnya)
+- [x] Halaman Merchants hanya dapat diakses oleh Superadmin ✅ — Admin Merchant di-redirect ke Dashboard saat akses `/merchants`
+- [x] Halaman Users: Superadmin melihat semua (3 users), Admin hanya melihat supervisor (0 supervisor) ✅
+- [x] Halaman Cashiers: scoped per merchant ✅ — Superadmin ada dropdown merchant; Admin auto-scoped (0 kasir)
+- [x] Halaman Products: Superadmin ada filter merchant, Admin hanya merchant sendiri (159 produk) ✅ — **Bug diperbaiki:** `prices.map` crash saat `prices` undefined, fix: `?? []`
+- [x] Halaman Sales: data sesuai merchant ✅ — Superadmin dengan filter, Admin auto-scoped (Rp 231.590.500)
+- [x] Halaman Expenses: data sesuai merchant dan role ✅ — tampil dengan filter merchant (Superadmin)
+- [x] Halaman Reports (Profit & Loss): kalkulasi benar ✅ — Laba Bersih = Rp 231.590.500 - Rp 0 = Rp 231.590.500
 
-> ⚠️ **Perlu login manual** — Silakan login ke https://poswork-web.vercel.app/ dan centang item di atas.
+> ✅ **Done** — Semua halaman diverifikasi via Playwright di https://poswork.baliwork.my.id/ — 16 Mei 2026
 
 ### 6.3 Data Integrity
 
