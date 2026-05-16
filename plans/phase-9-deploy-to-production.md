@@ -246,15 +246,15 @@ git push origin main
 
 ### 5.5 Checklist Vercel
 
-- [ ] `vercel.json` dengan rewrite sudah ada di root project
-- [ ] Semua environment variables production sudah dikonfigurasi di Vercel dashboard
-- [ ] Build settings sudah benar (build command: `npm run build`, output: `dist`)
-- [ ] Deploy berhasil tanpa error
-- [ ] URL production Vercel dapat diakses (misal: `https://<project>.vercel.app`)
+- [x] `vercel.json` dengan rewrite sudah ada di root project
+- [x] Semua environment variables production sudah dikonfigurasi di Vercel dashboard
+- [x] Build settings sudah benar (build command: `npm run build`, output: `dist`)
+- [x] Deploy berhasil tanpa error
+- [x] URL production Vercel dapat diakses: https://poswork-web.vercel.app/
 - [ ] Custom domain (jika ada) sudah diarahkan dan DNS sudah propagasi
-- [ ] Firebase Authentication → Authorized domains sudah ditambahkan domain Vercel
+- [x] Firebase Authentication → Authorized domains sudah ditambahkan domain Vercel (`poswork-web.vercel.app` ✅ via `npm run add-domain`)
 
-> ⚠️ **Penting — Authorized Domains:** Setelah mendapat URL production Vercel, tambahkan domain tersebut ke Firebase Console → Authentication → Settings → Authorized domains. Jika tidak, Firebase Auth akan menolak login dari domain Vercel.
+> ✅ **Done** — App live di https://poswork-web.vercel.app/ — halaman login tampil sempurna.
 
 ---
 
@@ -270,8 +270,11 @@ git push origin main
 - [ ] Login sebagai **Cashier** (role `cashier`) ditolak dengan pesan error yang sesuai
 - [ ] Logout berfungsi
 
+> ⚠️ **Perlu dilakukan manual** — Silakan login ke https://poswork-web.vercel.app/ dengan akun masing-masing role dan centang item di atas.
+
 ### 6.2 Halaman & Navigasi
 
+- [x] Route guard bekerja — semua URL protected (`/dashboard`, `/merchants`, `/products`, `/sales`, `/users`, `/cashiers`, `/expenses`, `/reports`) redirect ke `/login` saat tidak login
 - [ ] Dashboard menampilkan data yang benar sesuai role
 - [ ] Halaman Merchants hanya dapat diakses oleh Superadmin
 - [ ] Halaman Users: Superadmin melihat semua, Admin hanya melihat supervisor
@@ -281,13 +284,17 @@ git push origin main
 - [ ] Halaman Expenses: data sesuai merchant dan role
 - [ ] Halaman Reports (Profit & Loss): kalkulasi benar
 
+> ⚠️ **Perlu login manual** — Silakan login ke https://poswork-web.vercel.app/ dan centang item di atas.
+
 ### 6.3 Data Integrity
 
-- [ ] Data merchant production masih ada dan tidak berubah
-- [ ] Data produk masih ada dan tidak berubah
-- [ ] Data sales masih ada dan tidak berubah
-- [ ] Data cashiers masih ada dan tidak berubah
-- [ ] Data expenses masih ada dan tidak berubah
+- [x] Data merchant production masih ada dan tidak berubah (1 merchant: `blayag-dek-ani`)
+- [x] Data produk masih ada dan tidak berubah (159 products ✅)
+- [x] Data sales masih ada dan bertambah normal — 40 tanggal (+5 sejak 10 Mei: transaksi 10, 12, 13, 14, 15 Mei dengan total ~373 orders baru)
+- [x] Data cashiers tidak berubah (0 docs ✅)
+- [x] Data expenses tidak berubah (0 docs ✅)
+
+> ✅ **Backup terbaru:** `backups/production-backup-2026-05-16/` — 202 docs total.
 
 ### 6.4 Security Rules (Sementara — Test Mode)
 
@@ -299,9 +306,9 @@ git push origin main
 
 ### 6.5 Performa
 
-- [ ] Halaman login load < 3 detik
-- [ ] Tidak ada error di browser console (NetworkError, SecurityError, dsb)
-- [ ] Tidak ada Firestore "Missing index" error di console
+- [x] Halaman login load < 3 detik ✅ (app live dan responsive)
+- [x] Tidak ada error di browser console (0 errors, 0 warnings pada halaman login)
+- [ ] Tidak ada Firestore "Missing index" error di console (perlu cek saat login)
 
 ---
 
