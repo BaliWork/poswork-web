@@ -14,6 +14,7 @@
     "test": "vitest run",
     "test:seed": "vitest run --reporter=verbose src/tests/seed-firestore.test.ts",
     "test:verify": "vitest run --reporter=verbose src/tests/verify-auth-uid.test.ts",
+    "test:cashier-login": "vitest run --reporter=verbose src/tests/cashier-login.test.ts",
     "backup": "GOOGLE_APPLICATION_CREDENTIALS=secrets/production-service-account.json npx tsx scripts/backup-production.ts",
     "add-domain": "GOOGLE_APPLICATION_CREDENTIALS=secrets/production-service-account.json npx tsx scripts/add-authorized-domain.ts"
   },
