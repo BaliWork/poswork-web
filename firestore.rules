@@ -15,6 +15,7 @@ service cloud.firestore {
     // Admin: can read/write supervisor users within own merchant only
     // Supervisor: read own profile only
     // All authenticated users: can read their own profile (required for AuthContext)
+    // Cashier mobile: read own document by PIN (no Firebase Auth — PIN is document ID)
     match /users/{userId} {
       allow read, write: if isSuperadmin();
       allow read: if isSignedIn() && userId == request.auth.uid;
@@ -22,23 +23,30 @@ service cloud.firestore {
                                 && resource.data.role == 'supervisor';
       allow write: if isAdmin() && request.resource.data.merchant == getUser().merchant
                                  && request.resource.data.role == 'supervisor';
+      // Cashier login dari mobile app menggunakan PIN sebagai document ID.
+      // Kasir tidak memiliki akun Firebase Auth — izinkan baca hanya untuk role cashier.
+      allow read: if resource.data.role == 'cashier';
     }
 
     match /merchants/{merchantId} {
       allow read, write: if isSuperadmin();
       allow read: if isAdminOfMerchant(merchantId) || isSupervisorOfMerchant(merchantId);
+      allow read: if true; // kasir mobile membaca info merchant dan subcollection products
 
       // products subcollection — admin only (supervisor has no access)
+      // Kasir mobile membaca produk untuk menampilkan menu POS (tanpa Firebase Auth)
       match /products/{productId} {
         allow read, write: if isSuperadmin();
         allow read, write: if isAdminOfMerchant(merchantId);
+        allow read: if true; // kasir mobile app membaca menu produk
       }
 
-      // sales subcollection — supervisor: read-only
+      // sales subcollection — supervisor: read-only, kasir mobile: write transaksi
       match /sales/{saleDate} {
         allow read, write: if isSuperadmin();
         allow read, write: if isAdminOfMerchant(merchantId);
         allow read: if isSupervisorOfMerchant(merchantId);
+        allow write: if true; // kasir mobile app mencatat transaksi penjualan (tanpa Firebase Auth)
       }
 
       // cashiers subcollection — admin only (supervisor has no access)
